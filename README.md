@@ -121,14 +121,6 @@ Untuk menambahkan kolom PIN ke tabel users, jalankan migrasi:
 php artisan migrate
 ```
 
-### Membuat User dengan PIN
-
-Gunakan perintah artisan untuk membuat user dengan PIN secara langsung:
-
-```bash
-php artisan users:create-default --name="Nama User" --email="user@example.com" --password="password" --pin="123456"
-```
-
 ## Dokumentasi API
 
 API dokumentasi lengkap tersedia di:
