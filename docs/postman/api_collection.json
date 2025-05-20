@@ -1,0 +1,1286 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Puskesmas Kluwung",
+        "description": "Dokumentasi API untuk Sistem Informasi Puskesmas Kluwung",
+        "version": "1.0.0",
+        "contact": {
+            "name": "Admin Puskesmas",
+            "email": "admin@puskesmaskluwung.com"
+        }
+    },
+    "servers": [
+        {
+            "url": "{{base_url}}/api",
+            "description": "Server API Puskesmas Kluwung"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Autentikasi pengguna"
+        },
+        {
+            "name": "Pin",
+            "description": "Manajemen PIN pengguna"
+        },
+        {
+            "name": "Profile",
+            "description": "Manajemen profil pengguna"
+        },
+        {
+            "name": "Pendaftaran",
+            "description": "Pendaftaran kunjungan pasien"
+        },
+        {
+            "name": "Rekam Medis",
+            "description": "Data rekam medis pasien"
+        },
+        {
+            "name": "Dokter",
+            "description": "Informasi dokter"
+        },
+        {
+            "name": "Poli",
+            "description": "Informasi poliklinik"
+        }
+    ],
+    "paths": {
+        "/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Pendaftaran pengguna baru",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "name",
+                                    "nik",
+                                    "tanggal_lahir",
+                                    "jenis_kelamin",
+                                    "alamat"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "john@example.com"
+                                    },
+                                    "no_telepon": {
+                                        "type": "string",
+                                        "example": "081234567890"
+                                    },
+                                    "nik": {
+                                        "type": "string",
+                                        "example": "3507123456789012"
+                                    },
+                                    "tanggal_lahir": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1990-01-01"
+                                    },
+                                    "jenis_kelamin": {
+                                        "type": "string",
+                                        "enum": [
+                                            "Laki-laki",
+                                            "Perempuan"
+                                        ],
+                                        "example": "Laki-laki"
+                                    },
+                                    "alamat": {
+                                        "type": "string",
+                                        "example": "Jl. Contoh No. 123"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Pendaftaran berhasil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Pendaftaran berhasil"
+                                        },
+                                        "user": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "John Doe"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "john@example.com"
+                                                },
+                                                "role": {
+                                                    "type": "string",
+                                                    "example": "pasien"
+                                                }
+                                            }
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "1|laravel_sanctum_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                                        },
+                                        "has_pin": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "next_step": {
+                                            "type": "string",
+                                            "example": "create_pin"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login dengan email dan password",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "john@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login berhasil"
+                    },
+                    "401": {
+                        "description": "Kredensial tidak valid"
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    }
+                }
+            }
+        },
+        "/login-pin": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login dengan PIN",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "pin"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "john@example.com"
+                                    },
+                                    "no_telepon": {
+                                        "type": "string",
+                                        "example": "081234567890"
+                                    },
+                                    "pin": {
+                                        "type": "string",
+                                        "example": "123456"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login berhasil"
+                    },
+                    "401": {
+                        "description": "PIN tidak valid"
+                    },
+                    "404": {
+                        "description": "User tidak ditemukan"
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    }
+                }
+            }
+        },
+        "/verify-email": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Verifikasi email",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "john@example.com"
+                                    },
+                                    "no_telepon": {
+                                        "type": "string",
+                                        "example": "081234567890"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Email ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Pengguna ditemukan"
+                                        },
+                                        "user_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "John Doe"
+                                        },
+                                        "has_pin": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "auth_methods": {
+                                            "type": "object",
+                                            "properties": {
+                                                "pin": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Email tidak ditemukan"
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    }
+                }
+            }
+        },
+        "/user": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Mendapatkan info user yang sedang login",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Info user berhasil diambil"
+                    },
+                    "401": {
+                        "description": "Tidak terautentikasi"
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logout user",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Logout berhasil"
+                    },
+                    "401": {
+                        "description": "Tidak terautentikasi"
+                    }
+                }
+            }
+        },
+        "/pin": {
+            "post": {
+                "tags": [
+                    "Pin"
+                ],
+                "summary": "Membuat PIN baru",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "pin"
+                                ],
+                                "properties": {
+                                    "pin": {
+                                        "type": "string",
+                                        "example": "123456"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "PIN berhasil dibuat"
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Pin"
+                ],
+                "summary": "Mengubah PIN",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "current_pin",
+                                    "new_pin"
+                                ],
+                                "properties": {
+                                    "current_pin": {
+                                        "type": "string",
+                                        "example": "123456"
+                                    },
+                                    "new_pin": {
+                                        "type": "string",
+                                        "example": "654321"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "PIN berhasil diubah"
+                    },
+                    "400": {
+                        "description": "PIN belum dibuat"
+                    },
+                    "401": {
+                        "description": "PIN saat ini tidak valid"
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Pin"
+                ],
+                "summary": "Menghapus PIN",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "pin"
+                                ],
+                                "properties": {
+                                    "pin": {
+                                        "type": "string",
+                                        "example": "123456"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "PIN berhasil dihapus"
+                    },
+                    "400": {
+                        "description": "PIN belum dibuat"
+                    },
+                    "401": {
+                        "description": "PIN tidak valid"
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    }
+                }
+            }
+        },
+        "/pin/verify": {
+            "post": {
+                "tags": [
+                    "Pin"
+                ],
+                "summary": "Verifikasi PIN",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "pin"
+                                ],
+                                "properties": {
+                                    "pin": {
+                                        "type": "string",
+                                        "example": "123456"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "PIN valid"
+                    },
+                    "400": {
+                        "description": "PIN belum dibuat"
+                    },
+                    "401": {
+                        "description": "PIN tidak valid"
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    }
+                }
+            }
+        },
+        "/profile": {
+            "get": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Mendapatkan profil user",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Profil berhasil diambil"
+                    },
+                    "404": {
+                        "description": "Data pasien tidak ditemukan"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Mengupdate profil user",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "alamat",
+                                    "no_hp"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "john@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "newpassword123"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "example": "newpassword123"
+                                    },
+                                    "alamat": {
+                                        "type": "string",
+                                        "example": "Jl. Contoh No. 123"
+                                    },
+                                    "no_hp": {
+                                        "type": "string",
+                                        "example": "081234567890"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Profil berhasil diperbarui"
+                    },
+                    "404": {
+                        "description": "Data pasien tidak ditemukan"
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    }
+                }
+            }
+        },
+        "/profile/upload-photo": {
+            "post": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Upload foto profil",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "photo"
+                                ],
+                                "properties": {
+                                    "photo": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Foto profil berhasil diupload"
+                    },
+                    "404": {
+                        "description": "Data pasien tidak ditemukan"
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    }
+                }
+            }
+        },
+        "/keluarga": {
+            "get": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Mendapatkan daftar anggota keluarga",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Daftar anggota keluarga berhasil diambil"
+                    },
+                    "404": {
+                        "description": "Data pasien tidak ditemukan"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Menambah anggota keluarga",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "nik",
+                                    "nama",
+                                    "tanggal_lahir",
+                                    "jenis_kelamin",
+                                    "alamat",
+                                    "no_hp",
+                                    "hubungan"
+                                ],
+                                "properties": {
+                                    "nik": {
+                                        "type": "string",
+                                        "example": "3507123456789012"
+                                    },
+                                    "nama": {
+                                        "type": "string",
+                                        "example": "Jane Doe"
+                                    },
+                                    "tanggal_lahir": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1995-01-01"
+                                    },
+                                    "jenis_kelamin": {
+                                        "type": "string",
+                                        "enum": [
+                                            "L",
+                                            "P"
+                                        ],
+                                        "example": "P"
+                                    },
+                                    "alamat": {
+                                        "type": "string",
+                                        "example": "Jl. Contoh No. 123"
+                                    },
+                                    "no_hp": {
+                                        "type": "string",
+                                        "example": "081234567890"
+                                    },
+                                    "hubungan": {
+                                        "type": "string",
+                                        "example": "Istri"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Anggota keluarga berhasil ditambahkan"
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    }
+                }
+            }
+        },
+        "/keluarga/{id}": {
+            "put": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Mengupdate anggota keluarga",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "ID anggota keluarga"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "nama",
+                                    "tanggal_lahir",
+                                    "jenis_kelamin",
+                                    "alamat",
+                                    "no_hp",
+                                    "hubungan"
+                                ],
+                                "properties": {
+                                    "nama": {
+                                        "type": "string",
+                                        "example": "Jane Doe"
+                                    },
+                                    "tanggal_lahir": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1995-01-01"
+                                    },
+                                    "jenis_kelamin": {
+                                        "type": "string",
+                                        "enum": [
+                                            "L",
+                                            "P"
+                                        ],
+                                        "example": "P"
+                                    },
+                                    "alamat": {
+                                        "type": "string",
+                                        "example": "Jl. Contoh No. 123"
+                                    },
+                                    "no_hp": {
+                                        "type": "string",
+                                        "example": "081234567890"
+                                    },
+                                    "hubungan": {
+                                        "type": "string",
+                                        "example": "Istri"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Anggota keluarga berhasil diupdate"
+                    },
+                    "404": {
+                        "description": "Anggota keluarga tidak ditemukan"
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Menghapus anggota keluarga",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "ID anggota keluarga"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Anggota keluarga berhasil dihapus"
+                    },
+                    "404": {
+                        "description": "Anggota keluarga tidak ditemukan"
+                    }
+                }
+            }
+        },
+        "/riwayat-kunjungan": {
+            "get": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Mendapatkan riwayat kunjungan",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Riwayat kunjungan berhasil diambil"
+                    },
+                    "404": {
+                        "description": "Data pasien tidak ditemukan"
+                    }
+                }
+            }
+        },
+        "/pendaftaran": {
+            "get": {
+                "tags": [
+                    "Pendaftaran"
+                ],
+                "summary": "Mendapatkan daftar pendaftaran user",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Daftar pendaftaran berhasil diambil"
+                    },
+                    "404": {
+                        "description": "Data pasien tidak ditemukan"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Pendaftaran"
+                ],
+                "summary": "Membuat pendaftaran baru",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "dokter_id",
+                                    "tanggal",
+                                    "keluhan",
+                                    "jenis_kunjungan",
+                                    "cara_bayar"
+                                ],
+                                "properties": {
+                                    "dokter_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "tanggal": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2023-10-15"
+                                    },
+                                    "keluhan": {
+                                        "type": "string",
+                                        "example": "Demam dan batuk"
+                                    },
+                                    "jenis_kunjungan": {
+                                        "type": "string",
+                                        "enum": [
+                                            "Baru",
+                                            "Lama"
+                                        ],
+                                        "example": "Baru"
+                                    },
+                                    "cara_bayar": {
+                                        "type": "string",
+                                        "enum": [
+                                            "Umum",
+                                            "BPJS",
+                                            "Asuransi"
+                                        ],
+                                        "example": "BPJS"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Pendaftaran berhasil dibuat"
+                    },
+                    "404": {
+                        "description": "Data pasien tidak ditemukan"
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    }
+                }
+            }
+        },
+        "/pendaftaran/{id}": {
+            "get": {
+                "tags": [
+                    "Pendaftaran"
+                ],
+                "summary": "Mendapatkan detail pendaftaran",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "ID pendaftaran"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detail pendaftaran berhasil diambil"
+                    },
+                    "404": {
+                        "description": "Pendaftaran tidak ditemukan"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Pendaftaran"
+                ],
+                "summary": "Membatalkan pendaftaran",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "ID pendaftaran"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pendaftaran berhasil dibatalkan"
+                    },
+                    "404": {
+                        "description": "Pendaftaran tidak ditemukan atau tidak dapat dibatalkan"
+                    }
+                }
+            }
+        },
+        "/rekam-medis": {
+            "get": {
+                "tags": [
+                    "Rekam Medis"
+                ],
+                "summary": "Mendapatkan daftar rekam medis",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Daftar rekam medis berhasil diambil"
+                    },
+                    "404": {
+                        "description": "Data pasien tidak ditemukan"
+                    }
+                }
+            }
+        },
+        "/rekam-medis/{id}": {
+            "get": {
+                "tags": [
+                    "Rekam Medis"
+                ],
+                "summary": "Mendapatkan detail rekam medis",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "ID rekam medis"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detail rekam medis berhasil diambil"
+                    },
+                    "404": {
+                        "description": "Rekam medis tidak ditemukan"
+                    }
+                }
+            }
+        },
+        "/dokter": {
+            "get": {
+                "tags": [
+                    "Dokter"
+                ],
+                "summary": "Mendapatkan daftar dokter",
+                "responses": {
+                    "200": {
+                        "description": "Daftar dokter berhasil diambil"
+                    }
+                }
+            }
+        },
+        "/dokter/{id}": {
+            "get": {
+                "tags": [
+                    "Dokter"
+                ],
+                "summary": "Mendapatkan detail dokter",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "ID dokter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detail dokter berhasil diambil"
+                    },
+                    "404": {
+                        "description": "Dokter tidak ditemukan"
+                    }
+                }
+            }
+        },
+        "/jadwal-dokter": {
+            "get": {
+                "tags": [
+                    "Dokter"
+                ],
+                "summary": "Mendapatkan jadwal dokter",
+                "parameters": [
+                    {
+                        "name": "dokter_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Filter berdasarkan ID dokter"
+                    },
+                    {
+                        "name": "poli_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Filter berdasarkan ID poli"
+                    },
+                    {
+                        "name": "hari",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter berdasarkan hari"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Jadwal dokter berhasil diambil"
+                    }
+                }
+            }
+        },
+        "/poli": {
+            "get": {
+                "tags": [
+                    "Poli"
+                ],
+                "summary": "Mendapatkan daftar poliklinik",
+                "responses": {
+                    "200": {
+                        "description": "Daftar poliklinik berhasil diambil"
+                    }
+                }
+            }
+        },
+        "/poli/{id}": {
+            "get": {
+                "tags": [
+                    "Poli"
+                ],
+                "summary": "Mendapatkan detail poliklinik",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "ID poliklinik"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detail poliklinik berhasil diambil"
+                    },
+                    "404": {
+                        "description": "Poliklinik tidak ditemukan"
+                    }
+                }
+            }
+        },
+        "/jadwal-poli": {
+            "get": {
+                "tags": [
+                    "Poli"
+                ],
+                "summary": "Mendapatkan jadwal poliklinik",
+                "parameters": [
+                    {
+                        "name": "poli_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Filter berdasarkan ID poli"
+                    },
+                    {
+                        "name": "hari",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter berdasarkan hari"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Jadwal poliklinik berhasil diambil"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}

@@ -1,0 +1,587 @@
+{
+    "info": {
+        "_postman_id": "5b7e6a47-9cc2-4d0d-bbb9-8dfee432e8b6",
+        "name": "Puskesmas Kluwung - API PIN",
+        "description": "# API PIN - Puskesmas Kluwung\n\nAPI ini digunakan untuk manajemen PIN 6 digit sebagai metode autentikasi alternatif untuk pengguna aplikasi Puskesmas Kluwung.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Verifikasi Email",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"email\": \"pasien@example.com\"\n}"
+                },
+                "url": {
+                    "raw": "{{base_url}}/api/verify-email",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "verify-email"
+                    ]
+                },
+                "description": "Endpoint untuk memverifikasi keberadaan email pengguna. Digunakan sebagai langkah pertama dalam proses login tanpa password."
+            },
+            "response": [
+                {
+                    "name": "Verifikasi Email Sukses",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"pasien@example.com\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/verify-email",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "verify-email"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [],
+                    "cookie": [],
+                    "body": "{\n    \"success\": true,\n    \"message\": \"Email ditemukan\",\n    \"user_id\": 1,\n    \"name\": \"Pasien Test\",\n    \"has_pin\": true,\n    \"auth_methods\": {\n        \"pin\": true,\n        \"password\": true\n    }\n}"
+                }
+            ]
+        },
+        {
+            "name": "Login dengan PIN",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"email\": \"pasien@example.com\",\n    \"pin\": \"123456\"\n}"
+                },
+                "url": {
+                    "raw": "{{base_url}}/api/login-pin",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "login-pin"
+                    ]
+                },
+                "description": "Endpoint untuk login menggunakan email dan PIN 6 digit. Jika berhasil, akan mengembalikan token akses."
+            },
+            "response": [
+                {
+                    "name": "Login dengan PIN Sukses",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"pasien@example.com\",\n    \"pin\": \"123456\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/login-pin",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "login-pin"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [],
+                    "cookie": [],
+                    "body": "{\n    \"success\": true,\n    \"message\": \"Login dengan PIN berhasil\",\n    \"user\": {\n        \"id\": 1,\n        \"name\": \"Pasien Test\",\n        \"email\": \"pasien@example.com\",\n        \"role\": \"pasien\",\n        \"created_at\": \"2025-05-18T08:18:28.000000Z\",\n        \"updated_at\": \"2025-05-18T08:18:28.000000Z\"\n    },\n    \"token\": \"1|XAgB1sWyRRtIxMTsN8zsAOKV9dDgEb9DuZwJ4QFB\"\n}"
+                }
+            ]
+        },
+        {
+            "name": "Membuat PIN Baru",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "{{token}}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"pin\": \"123456\"\n}"
+                },
+                "url": {
+                    "raw": "{{base_url}}/api/pin",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "pin"
+                    ]
+                },
+                "description": "Endpoint untuk membuat PIN baru untuk pengguna yang telah login."
+            },
+            "response": [
+                {
+                    "name": "Membuat PIN Baru Sukses",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"pin\": \"123456\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/pin",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "pin"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [],
+                    "cookie": [],
+                    "body": "{\n    \"success\": true,\n    \"message\": \"PIN berhasil dibuat\"\n}"
+                }
+            ]
+        },
+        {
+            "name": "Verifikasi PIN",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "{{token}}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"pin\": \"123456\"\n}"
+                },
+                "url": {
+                    "raw": "{{base_url}}/api/pin/verify",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "pin",
+                        "verify"
+                    ]
+                },
+                "description": "Endpoint untuk memverifikasi PIN pengguna yang telah login."
+            },
+            "response": [
+                {
+                    "name": "Verifikasi PIN Sukses",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"pin\": \"123456\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/pin/verify",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "pin",
+                                "verify"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [],
+                    "cookie": [],
+                    "body": "{\n    \"success\": true,\n    \"message\": \"PIN valid\"\n}"
+                }
+            ]
+        },
+        {
+            "name": "Mengubah PIN",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "{{token}}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"current_pin\": \"123456\",\n    \"new_pin\": \"654321\"\n}"
+                },
+                "url": {
+                    "raw": "{{base_url}}/api/pin",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "pin"
+                    ]
+                },
+                "description": "Endpoint untuk mengubah PIN pengguna yang telah login."
+            },
+            "response": [
+                {
+                    "name": "Mengubah PIN Sukses",
+                    "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"current_pin\": \"123456\",\n    \"new_pin\": \"654321\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/pin",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "pin"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [],
+                    "cookie": [],
+                    "body": "{\n    \"success\": true,\n    \"message\": \"PIN berhasil diubah\"\n}"
+                }
+            ]
+        },
+        {
+            "name": "Menghapus PIN",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "{{token}}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"pin\": \"123456\"\n}"
+                },
+                "url": {
+                    "raw": "{{base_url}}/api/pin",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "pin"
+                    ]
+                },
+                "description": "Endpoint untuk menghapus PIN pengguna yang telah login."
+            },
+            "response": [
+                {
+                    "name": "Menghapus PIN Sukses",
+                    "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"pin\": \"123456\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/pin",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "pin"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [],
+                    "cookie": [],
+                    "body": "{\n    \"success\": true,\n    \"message\": \"PIN berhasil dihapus\"\n}"
+                }
+            ]
+        },
+        {
+            "name": "Informasi User",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "{{token}}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/api/user",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "user"
+                    ]
+                },
+                "description": "Endpoint untuk mendapatkan informasi pengguna saat ini termasuk status PIN."
+            },
+            "response": [
+                {
+                    "name": "Informasi User Sukses",
+                    "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/user",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "user"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [],
+                    "cookie": [],
+                    "body": "{\n    \"user\": {\n        \"id\": 1,\n        \"name\": \"Pasien Test\",\n        \"email\": \"pasien@example.com\",\n        \"role\": \"pasien\"\n    },\n    \"pasien\": {\n        \"id\": 1,\n        \"no_rm\": \"RM-001\",\n        \"nik\": \"1234567890\",\n        \"nama\": \"Pasien Test\",\n        \"tanggal_lahir\": \"2000-01-01\",\n        \"jenis_kelamin\": \"Laki-laki\",\n        \"alamat\": \"Jl. Contoh No. 123\",\n        \"no_telepon\": \"08123456789\"\n    },\n    \"has_pin\": true\n}"
+                }
+            ]
+        }
+    ],
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        }
+    ],
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:8000",
+            "type": "string"
+        },
+        {
+            "key": "token",
+            "value": "YOUR_AUTH_TOKEN",
+            "type": "string"
+        }
+    ]
+}

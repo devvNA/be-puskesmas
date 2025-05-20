@@ -1,0 +1,2041 @@
+{
+    "info": {
+        "name": "Puskesmas Kluwung API",
+        "description": "API untuk aplikasi pasien Puskesmas Kluwung",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost/puskesmas_kluwung/public/api",
+            "type": "string"
+        }
+    ],
+    "item": [
+        {
+            "name": "Autentikasi",
+            "description": "Endpoint untuk autentikasi user",
+            "item": [
+                {
+                    "name": "Register",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Pasien Baru\",\n    \"email\": \"pasien@example.com\",\n    \"password\": \"password123\",\n    \"password_confirmation\": \"password123\",\n    \"nik\": \"3471012345678901\",\n    \"tanggal_lahir\": \"1990-01-01\",\n    \"jenis_kelamin\": \"L\",\n    \"alamat\": \"Jl. Contoh No. 123\",\n    \"no_hp\": \"081234567890\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/register",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "register"
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Register Success",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Pasien Baru\",\n    \"email\": \"pasien@example.com\",\n    \"password\": \"password123\",\n    \"password_confirmation\": \"password123\",\n    \"nik\": \"3471012345678901\",\n    \"tanggal_lahir\": \"1990-01-01\",\n    \"jenis_kelamin\": \"L\",\n    \"alamat\": \"Jl. Contoh No. 123\",\n    \"no_hp\": \"081234567890\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/register",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "register"
+                                    ]
+                                }
+                            },
+                            "code": 201,
+                            "status": "Created",
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"message\": \"Pendaftaran berhasil\",\n    \"user\": {\n        \"id\": 1,\n        \"name\": \"Pasien Baru\",\n        \"email\": \"pasien@example.com\",\n        \"role\": \"pasien\",\n        \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n        \"updated_at\": \"2023-10-20T12:00:00.000000Z\"\n    },\n    \"pasien\": {\n        \"id\": 1,\n        \"user_id\": 1,\n        \"nik\": \"3471012345678901\",\n        \"nama\": \"Pasien Baru\",\n        \"tanggal_lahir\": \"1990-01-01\",\n        \"jenis_kelamin\": \"L\",\n        \"alamat\": \"Jl. Contoh No. 123\",\n        \"no_hp\": \"081234567890\",\n        \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n        \"updated_at\": \"2023-10-20T12:00:00.000000Z\"\n    },\n    \"token\": \"1|laravel_sanctum_Q2XPwV4jK5tgHMcZEZdFdNEnCWPxY0AZQvTOJFaz\"\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Login",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"pasien@example.com\",\n    \"password\": \"password123\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/login",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "login"
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Login Success",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"email\": \"pasien@example.com\",\n    \"password\": \"password123\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/login",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "login"
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"message\": \"Login berhasil\",\n    \"user\": {\n        \"id\": 1,\n        \"name\": \"Pasien Baru\",\n        \"email\": \"pasien@example.com\",\n        \"role\": \"pasien\",\n        \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n        \"updated_at\": \"2023-10-20T12:00:00.000000Z\"\n    },\n    \"token\": \"2|laravel_sanctum_R6HkLYXnpB2UwdQJP9jSD7V1m8OcxFaZgvTEW0i5\"\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Logout",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/logout",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "logout"
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Logout Success",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/logout",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "logout"
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"message\": \"Berhasil logout\"\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "User Info",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/user",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "user"
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "User Info",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/user",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "user"
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"user\": {\n        \"id\": 1,\n        \"name\": \"Pasien Baru\",\n        \"email\": \"pasien@example.com\",\n        \"role\": \"pasien\",\n        \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n        \"updated_at\": \"2023-10-20T12:00:00.000000Z\"\n    },\n    \"pasien\": {\n        \"id\": 1,\n        \"user_id\": 1,\n        \"nik\": \"3471012345678901\",\n        \"nama\": \"Pasien Baru\",\n        \"tanggal_lahir\": \"1990-01-01\",\n        \"jenis_kelamin\": \"L\",\n        \"alamat\": \"Jl. Contoh No. 123\",\n        \"no_hp\": \"081234567890\",\n        \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n        \"updated_at\": \"2023-10-20T12:00:00.000000Z\"\n    }\n}"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Dokter",
+            "description": "Endpoint untuk informasi dokter",
+            "item": [
+                {
+                    "name": "Daftar Dokter",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/dokter",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "dokter"
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Daftar Dokter",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/dokter",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "dokter"
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"poli_id\": 1,\n            \"nama\": \"Dr. Budi Santoso\",\n            \"spesialis\": \"Umum\",\n            \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n            \"updated_at\": \"2023-10-01T14:30:00.000000Z\"\n        },\n        {\n            \"id\": 2,\n            \"poli_id\": 2,\n            \"nama\": \"Dr. Siti Aminah\",\n            \"spesialis\": \"Gigi\",\n            \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n            \"updated_at\": \"2023-10-01T14:30:00.000000Z\"\n        }\n    ]\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Detail Dokter",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/dokter/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "dokter",
+                                "1"
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Detail Dokter",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/dokter/1",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "dokter",
+                                        "1"
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 1,\n        \"poli_id\": 1,\n        \"nama\": \"Dr. Budi Santoso\",\n        \"spesialis\": \"Umum\",\n        \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n        \"updated_at\": \"2023-10-01T14:30:00.000000Z\",\n        \"poli\": {\n            \"id\": 1,\n            \"nama\": \"Poli Umum\",\n            \"deskripsi\": \"Pelayanan kesehatan umum\",\n            \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n            \"updated_at\": \"2023-10-01T14:30:00.000000Z\"\n        }\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Jadwal Dokter",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/jadwal-dokter?dokter_id=1&hari=Senin",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "jadwal-dokter"
+                            ],
+                            "query": [
+                                {
+                                    "key": "dokter_id",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "hari",
+                                    "value": "Senin"
+                                }
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Jadwal Dokter",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/jadwal-dokter?dokter_id=1&hari=Senin",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "jadwal-dokter"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "dokter_id",
+                                            "value": "1"
+                                        },
+                                        {
+                                            "key": "hari",
+                                            "value": "Senin"
+                                        }
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"dokter_id\": 1,\n            \"hari\": \"Senin\",\n            \"jam_mulai\": \"08:00:00\",\n            \"jam_selesai\": \"12:00:00\",\n            \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n            \"updated_at\": \"2023-10-01T14:30:00.000000Z\",\n            \"dokter\": {\n                \"id\": 1,\n                \"poli_id\": 1,\n                \"nama\": \"Dr. Budi Santoso\",\n                \"spesialis\": \"Umum\",\n                \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"updated_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"poli\": {\n                    \"id\": 1,\n                    \"nama\": \"Poli Umum\",\n                    \"deskripsi\": \"Pelayanan kesehatan umum\",\n                    \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                    \"updated_at\": \"2023-10-01T14:30:00.000000Z\"\n                }\n            }\n        }\n    ]\n}"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Poliklinik",
+            "description": "Endpoint untuk informasi poliklinik",
+            "item": [
+                {
+                    "name": "Daftar Poli",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/poli",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "poli"
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Daftar Poli",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/poli",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "poli"
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"nama\": \"Poli Umum\",\n            \"deskripsi\": \"Pelayanan kesehatan umum\",\n            \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n            \"updated_at\": \"2023-10-01T14:30:00.000000Z\"\n        },\n        {\n            \"id\": 2,\n            \"nama\": \"Poli Gigi\",\n            \"deskripsi\": \"Pelayanan kesehatan gigi\",\n            \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n            \"updated_at\": \"2023-10-01T14:30:00.000000Z\"\n        }\n    ]\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Detail Poli",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/poli/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "poli",
+                                "1"
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Detail Poli",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/poli/1",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "poli",
+                                        "1"
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 1,\n        \"nama\": \"Poli Umum\",\n        \"deskripsi\": \"Pelayanan kesehatan umum\",\n        \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n        \"updated_at\": \"2023-10-01T14:30:00.000000Z\",\n        \"dokter\": [\n            {\n                \"id\": 1,\n                \"poli_id\": 1,\n                \"nama\": \"Dr. Budi Santoso\",\n                \"spesialis\": \"Umum\",\n                \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"updated_at\": \"2023-10-01T14:30:00.000000Z\"\n            }\n        ]\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Jadwal Poli",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/jadwal-poli?poli_id=1&hari=Senin",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "jadwal-poli"
+                            ],
+                            "query": [
+                                {
+                                    "key": "poli_id",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "hari",
+                                    "value": "Senin"
+                                }
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Jadwal Poli",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/jadwal-poli?poli_id=1&hari=Senin",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "jadwal-poli"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "poli_id",
+                                            "value": "1"
+                                        },
+                                        {
+                                            "key": "hari",
+                                            "value": "Senin"
+                                        }
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"poli_id\": 1,\n            \"hari\": \"Senin\",\n            \"jam_mulai\": \"08:00:00\",\n            \"jam_selesai\": \"14:00:00\",\n            \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n            \"updated_at\": \"2023-10-01T14:30:00.000000Z\",\n            \"poli\": {\n                \"id\": 1,\n                \"nama\": \"Poli Umum\",\n                \"deskripsi\": \"Pelayanan kesehatan umum\",\n                \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"updated_at\": \"2023-10-01T14:30:00.000000Z\"\n            }\n        }\n    ]\n}"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Pendaftaran",
+            "description": "Endpoint untuk pendaftaran online",
+            "item": [
+                {
+                    "name": "Daftar Pendaftaran",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/pendaftaran",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "pendaftaran"
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Daftar Pendaftaran",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/pendaftaran",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "pendaftaran"
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"pasien_id\": 1,\n            \"dokter_id\": 1,\n            \"tanggal\": \"2023-10-25\",\n            \"nomor_antrian\": 1,\n            \"keluhan\": \"Sakit kepala\",\n            \"jenis_kunjungan\": \"Baru\",\n            \"cara_bayar\": \"BPJS\",\n            \"status\": \"Menunggu\",\n            \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n            \"updated_at\": \"2023-10-20T12:00:00.000000Z\",\n            \"dokter\": {\n                \"id\": 1,\n                \"poli_id\": 1,\n                \"nama\": \"Dr. Budi Santoso\",\n                \"spesialis\": \"Umum\",\n                \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"updated_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"poli\": {\n                    \"id\": 1,\n                    \"nama\": \"Poli Umum\",\n                    \"deskripsi\": \"Pelayanan kesehatan umum\",\n                    \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                    \"updated_at\": \"2023-10-01T14:30:00.000000Z\"\n                }\n            }\n        }\n    ]\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Buat Pendaftaran",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"dokter_id\": 1,\n    \"tanggal\": \"2023-10-25\",\n    \"keluhan\": \"Sakit kepala\",\n    \"jenis_kunjungan\": \"Baru\",\n    \"cara_bayar\": \"BPJS\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/pendaftaran",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "pendaftaran"
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Buat Pendaftaran Success",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"dokter_id\": 1,\n    \"tanggal\": \"2023-10-25\",\n    \"keluhan\": \"Sakit kepala\",\n    \"jenis_kunjungan\": \"Baru\",\n    \"cara_bayar\": \"BPJS\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/pendaftaran",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "pendaftaran"
+                                    ]
+                                }
+                            },
+                            "status": "Created",
+                            "code": 201,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"success\": true,\n    \"message\": \"Pendaftaran berhasil\",\n    \"data\": {\n        \"id\": 1,\n        \"pasien_id\": 1,\n        \"dokter_id\": 1,\n        \"tanggal\": \"2023-10-25\",\n        \"nomor_antrian\": 1,\n        \"keluhan\": \"Sakit kepala\",\n        \"jenis_kunjungan\": \"Baru\",\n        \"cara_bayar\": \"BPJS\",\n        \"status\": \"Menunggu\",\n        \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n        \"updated_at\": \"2023-10-20T12:00:00.000000Z\"\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Detail Pendaftaran",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/pendaftaran/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "pendaftaran",
+                                "1"
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Detail Pendaftaran",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/pendaftaran/1",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "pendaftaran",
+                                        "1"
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 1,\n        \"pasien_id\": 1,\n        \"dokter_id\": 1,\n        \"tanggal\": \"2023-10-25\",\n        \"nomor_antrian\": 1,\n        \"keluhan\": \"Sakit kepala\",\n        \"jenis_kunjungan\": \"Baru\",\n        \"cara_bayar\": \"BPJS\",\n        \"status\": \"Menunggu\",\n        \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n        \"updated_at\": \"2023-10-20T12:00:00.000000Z\",\n        \"dokter\": {\n            \"id\": 1,\n            \"poli_id\": 1,\n            \"nama\": \"Dr. Budi Santoso\",\n            \"spesialis\": \"Umum\",\n            \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n            \"updated_at\": \"2023-10-01T14:30:00.000000Z\",\n            \"poli\": {\n                \"id\": 1,\n                \"nama\": \"Poli Umum\",\n                \"deskripsi\": \"Pelayanan kesehatan umum\",\n                \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"updated_at\": \"2023-10-01T14:30:00.000000Z\"\n            }\n        }\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Hapus Pendaftaran",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/pendaftaran/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "pendaftaran",
+                                "1"
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Hapus Pendaftaran Success",
+                            "originalRequest": {
+                                "method": "DELETE",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/pendaftaran/1",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "pendaftaran",
+                                        "1"
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"success\": true,\n    \"message\": \"Pendaftaran berhasil dibatalkan\"\n}"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Rekam Medis",
+            "description": "Endpoint untuk rekam medis",
+            "item": [
+                {
+                    "name": "Daftar Rekam Medis",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/rekam-medis",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "rekam-medis"
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Daftar Rekam Medis",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/rekam-medis",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "rekam-medis"
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [],
+                            "cookie": [],
+                            "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"pasien_id\": 1,\n            \"dokter_id\": 1,\n            \"pendaftaran_id\": 1,\n            \"tanggal\": \"2023-10-25\",\n            \"keluhan\": \"Sakit kepala\",\n            \"diagnosis\": \"Migrain\",\n            \"tindakan\": \"Pemberian obat pereda nyeri\",\n            \"catatan\": \"Hindari makanan pemicu migrain\",\n            \"created_at\": \"2023-10-25T10:00:00.000000Z\",\n            \"updated_at\": \"2023-10-25T10:00:00.000000Z\",\n            \"dokter\": {\n                \"id\": 1,\n                \"poli_id\": 1,\n                \"nama\": \"Dr. Budi Santoso\",\n                \"spesialis\": \"Umum\",\n                \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"updated_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"poli\": {\n                    \"id\": 1,\n                    \"nama\": \"Poli Umum\",\n                    \"deskripsi\": \"Pelayanan kesehatan umum\",\n                    \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                    \"updated_at\": \"2023-10-01T14:30:00.000000Z\"\n                }\n            },\n            \"pendaftaran\": {\n                \"id\": 1,\n                \"pasien_id\": 1,\n                \"dokter_id\": 1,\n                \"tanggal\": \"2023-10-25\",\n                \"nomor_antrian\": 1,\n                \"keluhan\": \"Sakit kepala\",\n                \"jenis_kunjungan\": \"Baru\",\n                \"cara_bayar\": \"BPJS\",\n                \"status\": \"Selesai\",\n                \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n                \"updated_at\": \"2023-10-25T10:00:00.000000Z\"\n            },\n            \"obat\": [\n                {\n                    \"id\": 1,\n                    \"nama\": \"Paracetamol\",\n                    \"jenis\": \"Tablet\",\n                    \"deskripsi\": \"Obat pereda nyeri dan penurun demam\",\n                    \"harga\": 5000,\n                    \"stok\": 100,\n                    \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                    \"updated_at\": \"2023-10-01T14:30:00.000000Z\",\n                    \"pivot\": {\n                        \"rekam_medis_id\": 1,\n                        \"obat_id\": 1,\n                        \"jumlah\": 10,\n                        \"aturan_pakai\": \"3x1 sehari setelah makan\"\n                    }\n                }\n            ]\n        }\n    ]\n}"
+                        },
+                        {
+                            "name": "Rekam Medis",
+                            "description": "Endpoint untuk rekam medis",
+                            "item": [
+                                {
+                                    "name": "Daftar Rekam Medis",
+                                    "request": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{token}}",
+                                                "type": "text"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{base_url}}/rekam-medis",
+                                            "host": [
+                                                "{{base_url}}"
+                                            ],
+                                            "path": [
+                                                "rekam-medis"
+                                            ]
+                                        }
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Daftar Rekam Medis",
+                                            "originalRequest": {
+                                                "method": "GET",
+                                                "header": [],
+                                                "url": {
+                                                    "raw": "{{base_url}}/rekam-medis",
+                                                    "host": [
+                                                        "{{base_url}}"
+                                                    ],
+                                                    "path": [
+                                                        "rekam-medis"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "OK",
+                                            "code": 200,
+                                            "_postman_previewlanguage": "json",
+                                            "header": [],
+                                            "cookie": [],
+                                            "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"pasien_id\": 1,\n            \"dokter_id\": 1,\n            \"pendaftaran_id\": 1,\n            \"tanggal\": \"2023-10-25\",\n            \"keluhan\": \"Sakit kepala\",\n            \"diagnosis\": \"Migrain\",\n            \"tindakan\": \"Pemberian obat pereda nyeri\",\n            \"catatan\": \"Hindari makanan pemicu migrain\",\n            \"created_at\": \"2023-10-25T10:00:00.000000Z\",\n            \"updated_at\": \"2023-10-25T10:00:00.000000Z\",\n            \"dokter\": {\n                \"id\": 1,\n                \"poli_id\": 1,\n                \"nama\": \"Dr. Budi Santoso\",\n                \"spesialis\": \"Umum\",\n                \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"updated_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"poli\": {\n                    \"id\": 1,\n                    \"nama\": \"Poli Umum\",\n                    \"deskripsi\": \"Pelayanan kesehatan umum\",\n                    \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                    \"updated_at\": \"2023-10-01T14:30:00.000000Z\"\n                }\n            },\n            \"pendaftaran\": {\n                \"id\": 1,\n                \"pasien_id\": 1,\n                \"dokter_id\": 1,\n                \"tanggal\": \"2023-10-25\",\n                \"nomor_antrian\": 1,\n                \"keluhan\": \"Sakit kepala\",\n                \"jenis_kunjungan\": \"Baru\",\n                \"cara_bayar\": \"BPJS\",\n                \"status\": \"Selesai\",\n                \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n                \"updated_at\": \"2023-10-25T10:00:00.000000Z\"\n            },\n            \"obat\": [\n                {\n                    \"id\": 1,\n                    \"nama\": \"Paracetamol\",\n                    \"jenis\": \"Tablet\",\n                    \"deskripsi\": \"Obat pereda nyeri dan penurun demam\",\n                    \"harga\": 5000,\n                    \"stok\": 100,\n                    \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                    \"updated_at\": \"2023-10-01T14:30:00.000000Z\",\n                    \"pivot\": {\n                        \"rekam_medis_id\": 1,\n                        \"obat_id\": 1,\n                        \"jumlah\": 10,\n                        \"aturan_pakai\": \"3x1 sehari setelah makan\"\n                    }\n                }\n            ]\n        }\n    ]\n}"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Detail Rekam Medis",
+                                    "request": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{token}}",
+                                                "type": "text"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{base_url}}/rekam-medis/1",
+                                            "host": [
+                                                "{{base_url}}"
+                                            ],
+                                            "path": [
+                                                "rekam-medis",
+                                                "1"
+                                            ]
+                                        }
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Detail Rekam Medis",
+                                            "originalRequest": {
+                                                "method": "GET",
+                                                "header": [],
+                                                "url": {
+                                                    "raw": "{{base_url}}/rekam-medis/1",
+                                                    "host": [
+                                                        "{{base_url}}"
+                                                    ],
+                                                    "path": [
+                                                        "rekam-medis",
+                                                        "1"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "OK",
+                                            "code": 200,
+                                            "_postman_previewlanguage": "json",
+                                            "header": [],
+                                            "cookie": [],
+                                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 1,\n        \"pasien_id\": 1,\n        \"dokter_id\": 1,\n        \"pendaftaran_id\": 1,\n        \"tanggal\": \"2023-10-25\",\n        \"keluhan\": \"Sakit kepala\",\n        \"diagnosis\": \"Migrain\",\n        \"tindakan\": \"Pemberian obat pereda nyeri\",\n        \"catatan\": \"Hindari makanan pemicu migrain\",\n        \"created_at\": \"2023-10-25T10:00:00.000000Z\",\n        \"updated_at\": \"2023-10-25T10:00:00.000000Z\",\n        \"dokter\": {\n            \"id\": 1,\n            \"poli_id\": 1,\n            \"nama\": \"Dr. Budi Santoso\",\n            \"spesialis\": \"Umum\",\n            \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n            \"updated_at\": \"2023-10-01T14:30:00.000000Z\",\n            \"poli\": {\n                \"id\": 1,\n                \"nama\": \"Poli Umum\",\n                \"deskripsi\": \"Pelayanan kesehatan umum\",\n                \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"updated_at\": \"2023-10-01T14:30:00.000000Z\"\n            }\n        },\n        \"pendaftaran\": {\n            \"id\": 1,\n            \"pasien_id\": 1,\n            \"dokter_id\": 1,\n            \"tanggal\": \"2023-10-25\",\n            \"nomor_antrian\": 1,\n            \"keluhan\": \"Sakit kepala\",\n            \"jenis_kunjungan\": \"Baru\",\n            \"cara_bayar\": \"BPJS\",\n            \"status\": \"Selesai\",\n            \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n            \"updated_at\": \"2023-10-25T10:00:00.000000Z\"\n        },\n        \"obat\": [\n            {\n                \"id\": 1,\n                \"nama\": \"Paracetamol\",\n                \"jenis\": \"Tablet\",\n                \"deskripsi\": \"Obat pereda nyeri dan penurun demam\",\n                \"harga\": 5000,\n                \"stok\": 100,\n                \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"updated_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"pivot\": {\n                    \"rekam_medis_id\": 1,\n                    \"obat_id\": 1,\n                    \"jumlah\": 10,\n                    \"aturan_pakai\": \"3x1 sehari setelah makan\"\n                }\n            }\n        ],\n        \"filePendukung\": [\n            {\n                \"id\": 1,\n                \"rekam_medis_id\": 1,\n                \"nama_file\": \"hasil_rontgen_20231025.jpg\",\n                \"jenis_file\": \"image/jpeg\",\n                \"path\": \"file_pendukung/hasil_rontgen_20231025.jpg\",\n                \"created_at\": \"2023-10-25T10:00:00.000000Z\",\n                \"updated_at\": \"2023-10-25T10:00:00.000000Z\"\n            }\n        ]\n    }\n}"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Profile",
+                            "description": "Endpoint untuk profil pasien",
+                            "item": [
+                                {
+                                    "name": "Lihat Profil",
+                                    "request": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{token}}",
+                                                "type": "text"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{base_url}}/profile",
+                                            "host": [
+                                                "{{base_url}}"
+                                            ],
+                                            "path": [
+                                                "profile"
+                                            ]
+                                        }
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Lihat Profil",
+                                            "originalRequest": {
+                                                "method": "GET",
+                                                "header": [],
+                                                "url": {
+                                                    "raw": "{{base_url}}/profile",
+                                                    "host": [
+                                                        "{{base_url}}"
+                                                    ],
+                                                    "path": [
+                                                        "profile"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "OK",
+                                            "code": 200,
+                                            "_postman_previewlanguage": "json",
+                                            "header": [],
+                                            "cookie": [],
+                                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"user\": {\n            \"id\": 1,\n            \"name\": \"Pasien Baru\",\n            \"email\": \"pasien@example.com\",\n            \"role\": \"pasien\",\n            \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n            \"updated_at\": \"2023-10-20T12:00:00.000000Z\"\n        },\n        \"pasien\": {\n            \"id\": 1,\n            \"user_id\": 1,\n            \"nik\": \"3471012345678901\",\n            \"nama\": \"Pasien Baru\",\n            \"tanggal_lahir\": \"1990-01-01\",\n            \"jenis_kelamin\": \"L\",\n            \"alamat\": \"Jl. Contoh No. 123\",\n            \"no_hp\": \"081234567890\",\n            \"foto\": null,\n            \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n            \"updated_at\": \"2023-10-20T12:00:00.000000Z\"\n        }\n    }\n}"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Update Profil",
+                                    "request": {
+                                        "method": "PUT",
+                                        "header": [
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{token}}",
+                                                "type": "text"
+                                            }
+                                        ],
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n    \"name\": \"Pasien Update\",\n    \"email\": \"pasien_update@example.com\",\n    \"alamat\": \"Jl. Update No. 456\",\n    \"no_hp\": \"087654321098\",\n    \"password\": \"newpassword123\",\n    \"password_confirmation\": \"newpassword123\"\n}"
+                                        },
+                                        "url": {
+                                            "raw": "{{base_url}}/profile",
+                                            "host": [
+                                                "{{base_url}}"
+                                            ],
+                                            "path": [
+                                                "profile"
+                                            ]
+                                        }
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Update Profil Success",
+                                            "originalRequest": {
+                                                "method": "PUT",
+                                                "header": [],
+                                                "body": {
+                                                    "mode": "raw",
+                                                    "raw": "{\n    \"name\": \"Pasien Update\",\n    \"email\": \"pasien_update@example.com\",\n    \"alamat\": \"Jl. Update No. 456\",\n    \"no_hp\": \"087654321098\",\n    \"password\": \"newpassword123\",\n    \"password_confirmation\": \"newpassword123\"\n}"
+                                                },
+                                                "url": {
+                                                    "raw": "{{base_url}}/profile",
+                                                    "host": [
+                                                        "{{base_url}}"
+                                                    ],
+                                                    "path": [
+                                                        "profile"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "OK",
+                                            "code": 200,
+                                            "_postman_previewlanguage": "json",
+                                            "header": [],
+                                            "cookie": [],
+                                            "body": "{\n    \"success\": true,\n    \"message\": \"Profil berhasil diperbarui\",\n    \"data\": {\n        \"user\": {\n            \"id\": 1,\n            \"name\": \"Pasien Update\",\n            \"email\": \"pasien_update@example.com\",\n            \"role\": \"pasien\",\n            \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n            \"updated_at\": \"2023-10-25T12:00:00.000000Z\"\n        },\n        \"pasien\": {\n            \"id\": 1,\n            \"user_id\": 1,\n            \"nik\": \"3471012345678901\",\n            \"nama\": \"Pasien Update\",\n            \"tanggal_lahir\": \"1990-01-01\",\n            \"jenis_kelamin\": \"L\",\n            \"alamat\": \"Jl. Update No. 456\",\n            \"no_hp\": \"087654321098\",\n            \"foto\": null,\n            \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n            \"updated_at\": \"2023-10-25T12:00:00.000000Z\"\n        }\n    }\n}"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Upload Foto",
+                                    "request": {
+                                        "method": "POST",
+                                        "header": [
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{token}}",
+                                                "type": "text"
+                                            }
+                                        ],
+                                        "body": {
+                                            "mode": "formdata",
+                                            "formdata": [
+                                                {
+                                                    "key": "photo",
+                                                    "type": "file",
+                                                    "src": "/path/to/photo.jpg"
+                                                }
+                                            ]
+                                        },
+                                        "url": {
+                                            "raw": "{{base_url}}/profile/upload-photo",
+                                            "host": [
+                                                "{{base_url}}"
+                                            ],
+                                            "path": [
+                                                "profile",
+                                                "upload-photo"
+                                            ]
+                                        }
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Upload Foto Success",
+                                            "originalRequest": {
+                                                "method": "POST",
+                                                "header": [],
+                                                "body": {
+                                                    "mode": "formdata",
+                                                    "formdata": [
+                                                        {
+                                                            "key": "photo",
+                                                            "type": "file",
+                                                            "src": "/path/to/photo.jpg"
+                                                        }
+                                                    ]
+                                                },
+                                                "url": {
+                                                    "raw": "{{base_url}}/profile/upload-photo",
+                                                    "host": [
+                                                        "{{base_url}}"
+                                                    ],
+                                                    "path": [
+                                                        "profile",
+                                                        "upload-photo"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "OK",
+                                            "code": 200,
+                                            "_postman_previewlanguage": "json",
+                                            "header": [],
+                                            "cookie": [],
+                                            "body": "{\n    \"success\": true,\n    \"message\": \"Foto profil berhasil diperbarui\",\n    \"data\": {\n        \"foto\": \"1698253714_1.jpg\",\n        \"foto_url\": \"http://localhost/puskesmas_kluwung/public/storage/pasien/1698253714_1.jpg\"\n    }\n}"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Daftar Keluarga",
+                                    "request": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{token}}",
+                                                "type": "text"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{base_url}}/keluarga",
+                                            "host": [
+                                                "{{base_url}}"
+                                            ],
+                                            "path": [
+                                                "keluarga"
+                                            ]
+                                        }
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Daftar Keluarga",
+                                            "originalRequest": {
+                                                "method": "GET",
+                                                "header": [],
+                                                "url": {
+                                                    "raw": "{{base_url}}/keluarga",
+                                                    "host": [
+                                                        "{{base_url}}"
+                                                    ],
+                                                    "path": [
+                                                        "keluarga"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "OK",
+                                            "code": 200,
+                                            "_postman_previewlanguage": "json",
+                                            "header": [],
+                                            "cookie": [],
+                                            "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 2,\n            \"user_id\": 1,\n            \"nik\": \"3471054321678901\",\n            \"nama\": \"Anak Pasien\",\n            \"tanggal_lahir\": \"2015-05-15\",\n            \"jenis_kelamin\": \"L\",\n            \"alamat\": \"Jl. Update No. 456\",\n            \"no_hp\": \"087654321098\",\n            \"hubungan\": \"Anak\",\n            \"foto\": null,\n            \"created_at\": \"2023-10-25T12:00:00.000000Z\",\n            \"updated_at\": \"2023-10-25T12:00:00.000000Z\"\n        }\n    ]\n}"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Tambah Keluarga",
+                                    "request": {
+                                        "method": "POST",
+                                        "header": [
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{token}}",
+                                                "type": "text"
+                                            }
+                                        ],
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n    \"nik\": \"3471054321678901\",\n    \"nama\": \"Anak Pasien\",\n    \"tanggal_lahir\": \"2015-05-15\",\n    \"jenis_kelamin\": \"L\",\n    \"alamat\": \"Jl. Update No. 456\",\n    \"no_hp\": \"087654321098\",\n    \"hubungan\": \"Anak\"\n}"
+                                        },
+                                        "url": {
+                                            "raw": "{{base_url}}/keluarga",
+                                            "host": [
+                                                "{{base_url}}"
+                                            ],
+                                            "path": [
+                                                "keluarga"
+                                            ]
+                                        }
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Tambah Keluarga Success",
+                                            "originalRequest": {
+                                                "method": "POST",
+                                                "header": [],
+                                                "body": {
+                                                    "mode": "raw",
+                                                    "raw": "{\n    \"nik\": \"3471054321678901\",\n    \"nama\": \"Anak Pasien\",\n    \"tanggal_lahir\": \"2015-05-15\",\n    \"jenis_kelamin\": \"L\",\n    \"alamat\": \"Jl. Update No. 456\",\n    \"no_hp\": \"087654321098\",\n    \"hubungan\": \"Anak\"\n}"
+                                                },
+                                                "url": {
+                                                    "raw": "{{base_url}}/keluarga",
+                                                    "host": [
+                                                        "{{base_url}}"
+                                                    ],
+                                                    "path": [
+                                                        "keluarga"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "Created",
+                                            "code": 201,
+                                            "_postman_previewlanguage": "json",
+                                            "header": [],
+                                            "cookie": [],
+                                            "body": "{\n    \"success\": true,\n    \"message\": \"Anggota keluarga berhasil ditambahkan\",\n    \"data\": {\n        \"id\": 2,\n        \"user_id\": 1,\n        \"nik\": \"3471054321678901\",\n        \"nama\": \"Anak Pasien\",\n        \"tanggal_lahir\": \"2015-05-15\",\n        \"jenis_kelamin\": \"L\",\n        \"alamat\": \"Jl. Update No. 456\",\n        \"no_hp\": \"087654321098\",\n        \"hubungan\": \"Anak\",\n        \"foto\": null,\n        \"created_at\": \"2023-10-25T12:00:00.000000Z\",\n        \"updated_at\": \"2023-10-25T12:00:00.000000Z\"\n    }\n}"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Update Keluarga",
+                                    "request": {
+                                        "method": "PUT",
+                                        "header": [
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{token}}",
+                                                "type": "text"
+                                            }
+                                        ],
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n    \"nik\": \"3471054321678901\",\n    \"nama\": \"Anak Pasien Update\",\n    \"tanggal_lahir\": \"2015-05-15\",\n    \"jenis_kelamin\": \"L\",\n    \"alamat\": \"Jl. Update No. 456\",\n    \"no_hp\": \"087654321098\",\n    \"hubungan\": \"Anak\"\n}"
+                                        },
+                                        "url": {
+                                            "raw": "{{base_url}}/keluarga/2",
+                                            "host": [
+                                                "{{base_url}}"
+                                            ],
+                                            "path": [
+                                                "keluarga",
+                                                "2"
+                                            ]
+                                        }
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Update Keluarga Success",
+                                            "originalRequest": {
+                                                "method": "PUT",
+                                                "header": [],
+                                                "body": {
+                                                    "mode": "raw",
+                                                    "raw": "{\n    \"nik\": \"3471054321678901\",\n    \"nama\": \"Anak Pasien Update\",\n    \"tanggal_lahir\": \"2015-05-15\",\n    \"jenis_kelamin\": \"L\",\n    \"alamat\": \"Jl. Update No. 456\",\n    \"no_hp\": \"087654321098\",\n    \"hubungan\": \"Anak\"\n}"
+                                                },
+                                                "url": {
+                                                    "raw": "{{base_url}}/keluarga/2",
+                                                    "host": [
+                                                        "{{base_url}}"
+                                                    ],
+                                                    "path": [
+                                                        "keluarga",
+                                                        "2"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "OK",
+                                            "code": 200,
+                                            "_postman_previewlanguage": "json",
+                                            "header": [],
+                                            "cookie": [],
+                                            "body": "{\n    \"success\": true,\n    \"message\": \"Anggota keluarga berhasil diperbarui\",\n    \"data\": {\n        \"id\": 2,\n        \"user_id\": 1,\n        \"nik\": \"3471054321678901\",\n        \"nama\": \"Anak Pasien Update\",\n        \"tanggal_lahir\": \"2015-05-15\",\n        \"jenis_kelamin\": \"L\",\n        \"alamat\": \"Jl. Update No. 456\",\n        \"no_hp\": \"087654321098\",\n        \"hubungan\": \"Anak\",\n        \"foto\": null,\n        \"created_at\": \"2023-10-25T12:00:00.000000Z\",\n        \"updated_at\": \"2023-10-25T12:15:00.000000Z\"\n    }\n}"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Hapus Keluarga",
+                                    "request": {
+                                        "method": "DELETE",
+                                        "header": [
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{token}}",
+                                                "type": "text"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{base_url}}/keluarga/2",
+                                            "host": [
+                                                "{{base_url}}"
+                                            ],
+                                            "path": [
+                                                "keluarga",
+                                                "2"
+                                            ]
+                                        }
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Hapus Keluarga Success",
+                                            "originalRequest": {
+                                                "method": "DELETE",
+                                                "header": [],
+                                                "url": {
+                                                    "raw": "{{base_url}}/keluarga/2",
+                                                    "host": [
+                                                        "{{base_url}}"
+                                                    ],
+                                                    "path": [
+                                                        "keluarga",
+                                                        "2"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "OK",
+                                            "code": 200,
+                                            "_postman_previewlanguage": "json",
+                                            "header": [],
+                                            "cookie": [],
+                                            "body": "{\n    \"success\": true,\n    \"message\": \"Anggota keluarga berhasil dihapus\"\n}"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Riwayat Kunjungan",
+                                    "request": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{token}}",
+                                                "type": "text"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{base_url}}/riwayat-kunjungan",
+                                            "host": [
+                                                "{{base_url}}"
+                                            ],
+                                            "path": [
+                                                "riwayat-kunjungan"
+                                            ]
+                                        }
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Riwayat Kunjungan",
+                                            "originalRequest": {
+                                                "method": "GET",
+                                                "header": [],
+                                                "url": {
+                                                    "raw": "{{base_url}}/riwayat-kunjungan",
+                                                    "host": [
+                                                        "{{base_url}}"
+                                                    ],
+                                                    "path": [
+                                                        "riwayat-kunjungan"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "OK",
+                                            "code": 200,
+                                            "_postman_previewlanguage": "json",
+                                            "header": [],
+                                            "cookie": [],
+                                            "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"pasien_id\": 1,\n            \"dokter_id\": 1,\n            \"tanggal\": \"2023-10-25\",\n            \"nomor_antrian\": 1,\n            \"keluhan\": \"Sakit kepala\",\n            \"jenis_kunjungan\": \"Baru\",\n            \"cara_bayar\": \"BPJS\",\n            \"status\": \"Selesai\",\n            \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n            \"updated_at\": \"2023-10-25T10:00:00.000000Z\",\n            \"dokter\": {\n                \"id\": 1,\n                \"poli_id\": 1,\n                \"nama\": \"Dr. Budi Santoso\",\n                \"spesialis\": \"Umum\",\n                \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"updated_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"poli\": {\n                    \"id\": 1,\n                    \"nama\": \"Poli Umum\",\n                    \"deskripsi\": \"Pelayanan kesehatan umum\",\n                    \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                    \"updated_at\": \"2023-10-01T14:30:00.000000Z\"\n                }\n            },\n            \"pasien\": {\n                \"id\": 1,\n                \"user_id\": 1,\n                \"nik\": \"3471012345678901\",\n                \"nama\": \"Pasien Update\",\n                \"tanggal_lahir\": \"1990-01-01\",\n                \"jenis_kelamin\": \"L\",\n                \"alamat\": \"Jl. Update No. 456\",\n                \"no_hp\": \"087654321098\",\n                \"foto\": null,\n                \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n                \"updated_at\": \"2023-10-25T12:00:00.000000Z\"\n            }\n        },\n        {\n            \"id\": 2,\n            \"pasien_id\": 2,\n            \"dokter_id\": 1,\n            \"tanggal\": \"2023-10-26\",\n            \"nomor_antrian\": 1,\n            \"keluhan\": \"Demam\",\n            \"jenis_kunjungan\": \"Baru\",\n            \"cara_bayar\": \"BPJS\",\n            \"status\": \"Menunggu\",\n            \"created_at\": \"2023-10-25T12:00:00.000000Z\",\n            \"updated_at\": \"2023-10-25T12:00:00.000000Z\",\n            \"dokter\": {\n                \"id\": 1,\n                \"poli_id\": 1,\n                \"nama\": \"Dr. Budi Santoso\",\n                \"spesialis\": \"Umum\",\n                \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"updated_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"poli\": {\n                    \"id\": 1,\n                    \"nama\": \"Poli Umum\",\n                    \"deskripsi\": \"Pelayanan kesehatan umum\",\n                    \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                    \"updated_at\": \"2023-10-01T14:30:00.000000Z\"\n                }\n            },\n            \"pasien\": {\n                \"id\": 2,\n                \"user_id\": 1,\n                \"nik\": \"3471054321678901\",\n                \"nama\": \"Anak Pasien Update\",\n                \"tanggal_lahir\": \"2015-05-15\",\n                \"jenis_kelamin\": \"L\",\n                \"alamat\": \"Jl. Update No. 456\",\n                \"no_hp\": \"087654321098\",\n                \"hubungan\": \"Anak\",\n                \"foto\": null,\n                \"created_at\": \"2023-10-25T12:00:00.000000Z\",\n                \"updated_at\": \"2023-10-25T12:15:00.000000Z\"\n            }\n        }\n    ]\n}"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Rekam Medis",
+                            "description": "Endpoint untuk rekam medis",
+                            "item": [
+                                {
+                                    "name": "Daftar Rekam Medis",
+                                    "request": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{token}}",
+                                                "type": "text"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{base_url}}/rekam-medis",
+                                            "host": [
+                                                "{{base_url}}"
+                                            ],
+                                            "path": [
+                                                "rekam-medis"
+                                            ]
+                                        }
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Daftar Rekam Medis",
+                                            "originalRequest": {
+                                                "method": "GET",
+                                                "header": [],
+                                                "url": {
+                                                    "raw": "{{base_url}}/rekam-medis",
+                                                    "host": [
+                                                        "{{base_url}}"
+                                                    ],
+                                                    "path": [
+                                                        "rekam-medis"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "OK",
+                                            "code": 200,
+                                            "_postman_previewlanguage": "json",
+                                            "header": [],
+                                            "cookie": [],
+                                            "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"pasien_id\": 1,\n            \"dokter_id\": 1,\n            \"pendaftaran_id\": 1,\n            \"tanggal\": \"2023-10-25\",\n            \"keluhan\": \"Sakit kepala\",\n            \"diagnosis\": \"Migrain\",\n            \"tindakan\": \"Pemberian obat pereda nyeri\",\n            \"catatan\": \"Hindari makanan pemicu migrain\",\n            \"created_at\": \"2023-10-25T10:00:00.000000Z\",\n            \"updated_at\": \"2023-10-25T10:00:00.000000Z\",\n            \"dokter\": {\n                \"id\": 1,\n                \"poli_id\": 1,\n                \"nama\": \"Dr. Budi Santoso\",\n                \"spesialis\": \"Umum\",\n                \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"updated_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"poli\": {\n                    \"id\": 1,\n                    \"nama\": \"Poli Umum\",\n                    \"deskripsi\": \"Pelayanan kesehatan umum\",\n                    \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                    \"updated_at\": \"2023-10-01T14:30:00.000000Z\"\n                }\n            },\n            \"pendaftaran\": {\n                \"id\": 1,\n                \"pasien_id\": 1,\n                \"dokter_id\": 1,\n                \"tanggal\": \"2023-10-25\",\n                \"nomor_antrian\": 1,\n                \"keluhan\": \"Sakit kepala\",\n                \"jenis_kunjungan\": \"Baru\",\n                \"cara_bayar\": \"BPJS\",\n                \"status\": \"Selesai\",\n                \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n                \"updated_at\": \"2023-10-25T10:00:00.000000Z\"\n            },\n            \"obat\": [\n                {\n                    \"id\": 1,\n                    \"nama\": \"Paracetamol\",\n                    \"jenis\": \"Tablet\",\n                    \"deskripsi\": \"Obat pereda nyeri dan penurun demam\",\n                    \"harga\": 5000,\n                    \"stok\": 100,\n                    \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                    \"updated_at\": \"2023-10-01T14:30:00.000000Z\",\n                    \"pivot\": {\n                        \"rekam_medis_id\": 1,\n                        \"obat_id\": 1,\n                        \"jumlah\": 10,\n                        \"aturan_pakai\": \"3x1 sehari setelah makan\"\n                    }\n                }\n            ]\n        }\n    ]\n}"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Detail Rekam Medis",
+                                    "request": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{token}}",
+                                                "type": "text"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{base_url}}/rekam-medis/1",
+                                            "host": [
+                                                "{{base_url}}"
+                                            ],
+                                            "path": [
+                                                "rekam-medis",
+                                                "1"
+                                            ]
+                                        }
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Detail Rekam Medis",
+                                            "originalRequest": {
+                                                "method": "GET",
+                                                "header": [],
+                                                "url": {
+                                                    "raw": "{{base_url}}/rekam-medis/1",
+                                                    "host": [
+                                                        "{{base_url}}"
+                                                    ],
+                                                    "path": [
+                                                        "rekam-medis",
+                                                        "1"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "OK",
+                                            "code": 200,
+                                            "_postman_previewlanguage": "json",
+                                            "header": [],
+                                            "cookie": [],
+                                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 1,\n        \"pasien_id\": 1,\n        \"dokter_id\": 1,\n        \"pendaftaran_id\": 1,\n        \"tanggal\": \"2023-10-25\",\n        \"keluhan\": \"Sakit kepala\",\n        \"diagnosis\": \"Migrain\",\n        \"tindakan\": \"Pemberian obat pereda nyeri\",\n        \"catatan\": \"Hindari makanan pemicu migrain\",\n        \"created_at\": \"2023-10-25T10:00:00.000000Z\",\n        \"updated_at\": \"2023-10-25T10:00:00.000000Z\",\n        \"dokter\": {\n            \"id\": 1,\n            \"poli_id\": 1,\n            \"nama\": \"Dr. Budi Santoso\",\n            \"spesialis\": \"Umum\",\n            \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n            \"updated_at\": \"2023-10-01T14:30:00.000000Z\",\n            \"poli\": {\n                \"id\": 1,\n                \"nama\": \"Poli Umum\",\n                \"deskripsi\": \"Pelayanan kesehatan umum\",\n                \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"updated_at\": \"2023-10-01T14:30:00.000000Z\"\n            }\n        },\n        \"pendaftaran\": {\n            \"id\": 1,\n            \"pasien_id\": 1,\n            \"dokter_id\": 1,\n            \"tanggal\": \"2023-10-25\",\n            \"nomor_antrian\": 1,\n            \"keluhan\": \"Sakit kepala\",\n            \"jenis_kunjungan\": \"Baru\",\n            \"cara_bayar\": \"BPJS\",\n            \"status\": \"Selesai\",\n            \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n            \"updated_at\": \"2023-10-25T10:00:00.000000Z\"\n        },\n        \"obat\": [\n            {\n                \"id\": 1,\n                \"nama\": \"Paracetamol\",\n                \"jenis\": \"Tablet\",\n                \"deskripsi\": \"Obat pereda nyeri dan penurun demam\",\n                \"harga\": 5000,\n                \"stok\": 100,\n                \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"updated_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"pivot\": {\n                    \"rekam_medis_id\": 1,\n                    \"obat_id\": 1,\n                    \"jumlah\": 10,\n                    \"aturan_pakai\": \"3x1 sehari setelah makan\"\n                }\n            }\n        ],\n        \"filePendukung\": [\n            {\n                \"id\": 1,\n                \"rekam_medis_id\": 1,\n                \"nama_file\": \"hasil_rontgen_20231025.jpg\",\n                \"jenis_file\": \"image/jpeg\",\n                \"path\": \"file_pendukung/hasil_rontgen_20231025.jpg\",\n                \"created_at\": \"2023-10-25T10:00:00.000000Z\",\n                \"updated_at\": \"2023-10-25T10:00:00.000000Z\"\n            }\n        ]\n    }\n}"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Profile",
+                            "description": "Endpoint untuk profil pasien",
+                            "item": [
+                                {
+                                    "name": "Lihat Profil",
+                                    "request": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{token}}",
+                                                "type": "text"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{base_url}}/profile",
+                                            "host": [
+                                                "{{base_url}}"
+                                            ],
+                                            "path": [
+                                                "profile"
+                                            ]
+                                        }
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Lihat Profil",
+                                            "originalRequest": {
+                                                "method": "GET",
+                                                "header": [],
+                                                "url": {
+                                                    "raw": "{{base_url}}/profile",
+                                                    "host": [
+                                                        "{{base_url}}"
+                                                    ],
+                                                    "path": [
+                                                        "profile"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "OK",
+                                            "code": 200,
+                                            "_postman_previewlanguage": "json",
+                                            "header": [],
+                                            "cookie": [],
+                                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"user\": {\n            \"id\": 1,\n            \"name\": \"Pasien Baru\",\n            \"email\": \"pasien@example.com\",\n            \"role\": \"pasien\",\n            \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n            \"updated_at\": \"2023-10-20T12:00:00.000000Z\"\n        },\n        \"pasien\": {\n            \"id\": 1,\n            \"user_id\": 1,\n            \"nik\": \"3471012345678901\",\n            \"nama\": \"Pasien Baru\",\n            \"tanggal_lahir\": \"1990-01-01\",\n            \"jenis_kelamin\": \"L\",\n            \"alamat\": \"Jl. Contoh No. 123\",\n            \"no_hp\": \"081234567890\",\n            \"foto\": null,\n            \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n            \"updated_at\": \"2023-10-20T12:00:00.000000Z\"\n        }\n    }\n}"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Update Profil",
+                                    "request": {
+                                        "method": "PUT",
+                                        "header": [
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{token}}",
+                                                "type": "text"
+                                            }
+                                        ],
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n    \"name\": \"Pasien Update\",\n    \"email\": \"pasien_update@example.com\",\n    \"alamat\": \"Jl. Update No. 456\",\n    \"no_hp\": \"087654321098\",\n    \"password\": \"newpassword123\",\n    \"password_confirmation\": \"newpassword123\"\n}"
+                                        },
+                                        "url": {
+                                            "raw": "{{base_url}}/profile",
+                                            "host": [
+                                                "{{base_url}}"
+                                            ],
+                                            "path": [
+                                                "profile"
+                                            ]
+                                        }
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Update Profil Success",
+                                            "originalRequest": {
+                                                "method": "PUT",
+                                                "header": [],
+                                                "body": {
+                                                    "mode": "raw",
+                                                    "raw": "{\n    \"name\": \"Pasien Update\",\n    \"email\": \"pasien_update@example.com\",\n    \"alamat\": \"Jl. Update No. 456\",\n    \"no_hp\": \"087654321098\",\n    \"password\": \"newpassword123\",\n    \"password_confirmation\": \"newpassword123\"\n}"
+                                                },
+                                                "url": {
+                                                    "raw": "{{base_url}}/profile",
+                                                    "host": [
+                                                        "{{base_url}}"
+                                                    ],
+                                                    "path": [
+                                                        "profile"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "OK",
+                                            "code": 200,
+                                            "_postman_previewlanguage": "json",
+                                            "header": [],
+                                            "cookie": [],
+                                            "body": "{\n    \"success\": true,\n    \"message\": \"Profil berhasil diperbarui\",\n    \"data\": {\n        \"user\": {\n            \"id\": 1,\n            \"name\": \"Pasien Update\",\n            \"email\": \"pasien_update@example.com\",\n            \"role\": \"pasien\",\n            \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n            \"updated_at\": \"2023-10-25T12:00:00.000000Z\"\n        },\n        \"pasien\": {\n            \"id\": 1,\n            \"user_id\": 1,\n            \"nik\": \"3471012345678901\",\n            \"nama\": \"Pasien Update\",\n            \"tanggal_lahir\": \"1990-01-01\",\n            \"jenis_kelamin\": \"L\",\n            \"alamat\": \"Jl. Update No. 456\",\n            \"no_hp\": \"087654321098\",\n            \"foto\": null,\n            \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n            \"updated_at\": \"2023-10-25T12:00:00.000000Z\"\n        }\n    }\n}"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Upload Foto",
+                                    "request": {
+                                        "method": "POST",
+                                        "header": [
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{token}}",
+                                                "type": "text"
+                                            }
+                                        ],
+                                        "body": {
+                                            "mode": "formdata",
+                                            "formdata": [
+                                                {
+                                                    "key": "photo",
+                                                    "type": "file",
+                                                    "src": "/path/to/photo.jpg"
+                                                }
+                                            ]
+                                        },
+                                        "url": {
+                                            "raw": "{{base_url}}/profile/upload-photo",
+                                            "host": [
+                                                "{{base_url}}"
+                                            ],
+                                            "path": [
+                                                "profile",
+                                                "upload-photo"
+                                            ]
+                                        }
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Upload Foto Success",
+                                            "originalRequest": {
+                                                "method": "POST",
+                                                "header": [],
+                                                "body": {
+                                                    "mode": "formdata",
+                                                    "formdata": [
+                                                        {
+                                                            "key": "photo",
+                                                            "type": "file",
+                                                            "src": "/path/to/photo.jpg"
+                                                        }
+                                                    ]
+                                                },
+                                                "url": {
+                                                    "raw": "{{base_url}}/profile/upload-photo",
+                                                    "host": [
+                                                        "{{base_url}}"
+                                                    ],
+                                                    "path": [
+                                                        "profile",
+                                                        "upload-photo"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "OK",
+                                            "code": 200,
+                                            "_postman_previewlanguage": "json",
+                                            "header": [],
+                                            "cookie": [],
+                                            "body": "{\n    \"success\": true,\n    \"message\": \"Foto profil berhasil diperbarui\",\n    \"data\": {\n        \"foto\": \"1698253714_1.jpg\",\n        \"foto_url\": \"http://localhost/puskesmas_kluwung/public/storage/pasien/1698253714_1.jpg\"\n    }\n}"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Daftar Keluarga",
+                                    "request": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{token}}",
+                                                "type": "text"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{base_url}}/keluarga",
+                                            "host": [
+                                                "{{base_url}}"
+                                            ],
+                                            "path": [
+                                                "keluarga"
+                                            ]
+                                        }
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Daftar Keluarga",
+                                            "originalRequest": {
+                                                "method": "GET",
+                                                "header": [],
+                                                "url": {
+                                                    "raw": "{{base_url}}/keluarga",
+                                                    "host": [
+                                                        "{{base_url}}"
+                                                    ],
+                                                    "path": [
+                                                        "keluarga"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "OK",
+                                            "code": 200,
+                                            "_postman_previewlanguage": "json",
+                                            "header": [],
+                                            "cookie": [],
+                                            "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 2,\n            \"user_id\": 1,\n            \"nik\": \"3471054321678901\",\n            \"nama\": \"Anak Pasien\",\n            \"tanggal_lahir\": \"2015-05-15\",\n            \"jenis_kelamin\": \"L\",\n            \"alamat\": \"Jl. Update No. 456\",\n            \"no_hp\": \"087654321098\",\n            \"hubungan\": \"Anak\",\n            \"foto\": null,\n            \"created_at\": \"2023-10-25T12:00:00.000000Z\",\n            \"updated_at\": \"2023-10-25T12:00:00.000000Z\"\n        }\n    ]\n}"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Tambah Keluarga",
+                                    "request": {
+                                        "method": "POST",
+                                        "header": [
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{token}}",
+                                                "type": "text"
+                                            }
+                                        ],
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n    \"nik\": \"3471054321678901\",\n    \"nama\": \"Anak Pasien\",\n    \"tanggal_lahir\": \"2015-05-15\",\n    \"jenis_kelamin\": \"L\",\n    \"alamat\": \"Jl. Update No. 456\",\n    \"no_hp\": \"087654321098\",\n    \"hubungan\": \"Anak\"\n}"
+                                        },
+                                        "url": {
+                                            "raw": "{{base_url}}/keluarga",
+                                            "host": [
+                                                "{{base_url}}"
+                                            ],
+                                            "path": [
+                                                "keluarga"
+                                            ]
+                                        }
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Tambah Keluarga Success",
+                                            "originalRequest": {
+                                                "method": "POST",
+                                                "header": [],
+                                                "body": {
+                                                    "mode": "raw",
+                                                    "raw": "{\n    \"nik\": \"3471054321678901\",\n    \"nama\": \"Anak Pasien\",\n    \"tanggal_lahir\": \"2015-05-15\",\n    \"jenis_kelamin\": \"L\",\n    \"alamat\": \"Jl. Update No. 456\",\n    \"no_hp\": \"087654321098\",\n    \"hubungan\": \"Anak\"\n}"
+                                                },
+                                                "url": {
+                                                    "raw": "{{base_url}}/keluarga",
+                                                    "host": [
+                                                        "{{base_url}}"
+                                                    ],
+                                                    "path": [
+                                                        "keluarga"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "Created",
+                                            "code": 201,
+                                            "_postman_previewlanguage": "json",
+                                            "header": [],
+                                            "cookie": [],
+                                            "body": "{\n    \"success\": true,\n    \"message\": \"Anggota keluarga berhasil ditambahkan\",\n    \"data\": {\n        \"id\": 2,\n        \"user_id\": 1,\n        \"nik\": \"3471054321678901\",\n        \"nama\": \"Anak Pasien\",\n        \"tanggal_lahir\": \"2015-05-15\",\n        \"jenis_kelamin\": \"L\",\n        \"alamat\": \"Jl. Update No. 456\",\n        \"no_hp\": \"087654321098\",\n        \"hubungan\": \"Anak\",\n        \"foto\": null,\n        \"created_at\": \"2023-10-25T12:00:00.000000Z\",\n        \"updated_at\": \"2023-10-25T12:00:00.000000Z\"\n    }\n}"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Update Keluarga",
+                                    "request": {
+                                        "method": "PUT",
+                                        "header": [
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{token}}",
+                                                "type": "text"
+                                            }
+                                        ],
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n    \"nik\": \"3471054321678901\",\n    \"nama\": \"Anak Pasien Update\",\n    \"tanggal_lahir\": \"2015-05-15\",\n    \"jenis_kelamin\": \"L\",\n    \"alamat\": \"Jl. Update No. 456\",\n    \"no_hp\": \"087654321098\",\n    \"hubungan\": \"Anak\"\n}"
+                                        },
+                                        "url": {
+                                            "raw": "{{base_url}}/keluarga/2",
+                                            "host": [
+                                                "{{base_url}}"
+                                            ],
+                                            "path": [
+                                                "keluarga",
+                                                "2"
+                                            ]
+                                        }
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Update Keluarga Success",
+                                            "originalRequest": {
+                                                "method": "PUT",
+                                                "header": [],
+                                                "body": {
+                                                    "mode": "raw",
+                                                    "raw": "{\n    \"nik\": \"3471054321678901\",\n    \"nama\": \"Anak Pasien Update\",\n    \"tanggal_lahir\": \"2015-05-15\",\n    \"jenis_kelamin\": \"L\",\n    \"alamat\": \"Jl. Update No. 456\",\n    \"no_hp\": \"087654321098\",\n    \"hubungan\": \"Anak\"\n}"
+                                                },
+                                                "url": {
+                                                    "raw": "{{base_url}}/keluarga/2",
+                                                    "host": [
+                                                        "{{base_url}}"
+                                                    ],
+                                                    "path": [
+                                                        "keluarga",
+                                                        "2"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "OK",
+                                            "code": 200,
+                                            "_postman_previewlanguage": "json",
+                                            "header": [],
+                                            "cookie": [],
+                                            "body": "{\n    \"success\": true,\n    \"message\": \"Anggota keluarga berhasil diperbarui\",\n    \"data\": {\n        \"id\": 2,\n        \"user_id\": 1,\n        \"nik\": \"3471054321678901\",\n        \"nama\": \"Anak Pasien Update\",\n        \"tanggal_lahir\": \"2015-05-15\",\n        \"jenis_kelamin\": \"L\",\n        \"alamat\": \"Jl. Update No. 456\",\n        \"no_hp\": \"087654321098\",\n        \"hubungan\": \"Anak\",\n        \"foto\": null,\n        \"created_at\": \"2023-10-25T12:00:00.000000Z\",\n        \"updated_at\": \"2023-10-25T12:15:00.000000Z\"\n    }\n}"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Hapus Keluarga",
+                                    "request": {
+                                        "method": "DELETE",
+                                        "header": [
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{token}}",
+                                                "type": "text"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{base_url}}/keluarga/2",
+                                            "host": [
+                                                "{{base_url}}"
+                                            ],
+                                            "path": [
+                                                "keluarga",
+                                                "2"
+                                            ]
+                                        }
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Hapus Keluarga Success",
+                                            "originalRequest": {
+                                                "method": "DELETE",
+                                                "header": [],
+                                                "url": {
+                                                    "raw": "{{base_url}}/keluarga/2",
+                                                    "host": [
+                                                        "{{base_url}}"
+                                                    ],
+                                                    "path": [
+                                                        "keluarga",
+                                                        "2"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "OK",
+                                            "code": 200,
+                                            "_postman_previewlanguage": "json",
+                                            "header": [],
+                                            "cookie": [],
+                                            "body": "{\n    \"success\": true,\n    \"message\": \"Anggota keluarga berhasil dihapus\"\n}"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Riwayat Kunjungan",
+                                    "request": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{token}}",
+                                                "type": "text"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{base_url}}/riwayat-kunjungan",
+                                            "host": [
+                                                "{{base_url}}"
+                                            ],
+                                            "path": [
+                                                "riwayat-kunjungan"
+                                            ]
+                                        }
+                                    },
+                                    "response": [
+                                        {
+                                            "name": "Riwayat Kunjungan",
+                                            "originalRequest": {
+                                                "method": "GET",
+                                                "header": [],
+                                                "url": {
+                                                    "raw": "{{base_url}}/riwayat-kunjungan",
+                                                    "host": [
+                                                        "{{base_url}}"
+                                                    ],
+                                                    "path": [
+                                                        "riwayat-kunjungan"
+                                                    ]
+                                                }
+                                            },
+                                            "status": "OK",
+                                            "code": 200,
+                                            "_postman_previewlanguage": "json",
+                                            "header": [],
+                                            "cookie": [],
+                                            "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"pasien_id\": 1,\n            \"dokter_id\": 1,\n            \"tanggal\": \"2023-10-25\",\n            \"nomor_antrian\": 1,\n            \"keluhan\": \"Sakit kepala\",\n            \"jenis_kunjungan\": \"Baru\",\n            \"cara_bayar\": \"BPJS\",\n            \"status\": \"Selesai\",\n            \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n            \"updated_at\": \"2023-10-25T10:00:00.000000Z\",\n            \"dokter\": {\n                \"id\": 1,\n                \"poli_id\": 1,\n                \"nama\": \"Dr. Budi Santoso\",\n                \"spesialis\": \"Umum\",\n                \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"updated_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"poli\": {\n                    \"id\": 1,\n                    \"nama\": \"Poli Umum\",\n                    \"deskripsi\": \"Pelayanan kesehatan umum\",\n                    \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                    \"updated_at\": \"2023-10-01T14:30:00.000000Z\"\n                }\n            },\n            \"pasien\": {\n                \"id\": 1,\n                \"user_id\": 1,\n                \"nik\": \"3471012345678901\",\n                \"nama\": \"Pasien Update\",\n                \"tanggal_lahir\": \"1990-01-01\",\n                \"jenis_kelamin\": \"L\",\n                \"alamat\": \"Jl. Update No. 456\",\n                \"no_hp\": \"087654321098\",\n                \"foto\": null,\n                \"created_at\": \"2023-10-20T12:00:00.000000Z\",\n                \"updated_at\": \"2023-10-25T12:00:00.000000Z\"\n            }\n        },\n        {\n            \"id\": 2,\n            \"pasien_id\": 2,\n            \"dokter_id\": 1,\n            \"tanggal\": \"2023-10-26\",\n            \"nomor_antrian\": 1,\n            \"keluhan\": \"Demam\",\n            \"jenis_kunjungan\": \"Baru\",\n            \"cara_bayar\": \"BPJS\",\n            \"status\": \"Menunggu\",\n            \"created_at\": \"2023-10-25T12:00:00.000000Z\",\n            \"updated_at\": \"2023-10-25T12:00:00.000000Z\",\n            \"dokter\": {\n                \"id\": 1,\n                \"poli_id\": 1,\n                \"nama\": \"Dr. Budi Santoso\",\n                \"spesialis\": \"Umum\",\n                \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"updated_at\": \"2023-10-01T14:30:00.000000Z\",\n                \"poli\": {\n                    \"id\": 1,\n                    \"nama\": \"Poli Umum\",\n                    \"deskripsi\": \"Pelayanan kesehatan umum\",\n                    \"created_at\": \"2023-10-01T14:30:00.000000Z\",\n                    \"updated_at\": \"2023-10-01T14:30:00.000000Z\"\n                }\n            },\n            \"pasien\": {\n                \"id\": 2,\n                \"user_id\": 1,\n                \"nik\": \"3471054321678901\",\n                \"nama\": \"Anak Pasien Update\",\n                \"tanggal_lahir\": \"2015-05-15\",\n                \"jenis_kelamin\": \"L\",\n                \"alamat\": \"Jl. Update No. 456\",\n                \"no_hp\": \"087654321098\",\n                \"hubungan\": \"Anak\",\n                \"foto\": null,\n                \"created_at\": \"2023-10-25T12:00:00.000000Z\",\n                \"updated_at\": \"2023-10-25T12:15:00.000000Z\"\n            }\n        }\n    ]\n}"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
