@@ -44,9 +44,9 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'name'          => 'required|string|max:255',
             'email'         => 'required_without:no_telepon|string|email|max:255|unique:users,email',
-            'no_telepon'    => 'required_without:email|string|unique:pasien,no_telepon',
+            'no_telepon'    => 'required_without:email|string|unique:users,no_telepon',
             'nik'           => 'required|string|unique:pasien,nik',
-            'tanggal_lahir' => 'required|date',
+            'tanggal_lahir' => 'nullable|date',
             'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
             'alamat'        => 'required|string',
         ]);
@@ -73,6 +73,7 @@ class AuthController extends Controller
         $user = User::create([
             'name'     => $request->name,
             'email'    => $email,
+            'no_telepon'    => $request->no_telepon ?? null,
             'password' => Hash::make($randomPassword), // Password acak yang tidak akan digunakan
             'role'     => 'pasien',
         ]);
@@ -84,7 +85,7 @@ class AuthController extends Controller
             'no_rm'         => $this->generateNoRM(),
             'nik'           => $request->nik,
             'nama'          => $request->name,
-            'tanggal_lahir' => $request->tanggal_lahir,
+            'tanggal_lahir' => $request->tanggal_lahir ?? null,
             'jenis_kelamin' => $request->jenis_kelamin,
             'alamat'        => $request->alamat,
             'no_telepon'    => $request->no_telepon ?? null,
@@ -248,13 +249,12 @@ class AuthController extends Controller
     }
 
     /**
-     * Verify email untuk login tanpa password
+     * Verify untuk login tanpa password menggunakan email atau nomor telepon
      */
-    public function verifyEmail(Request $request)
+    public function verifyUser(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'required_without:no_telepon|email',
-            'no_telepon' => 'required_without:email|string',
+            'identifier' => 'required|string',
         ]);
 
         if ($validator->fails()) {
@@ -266,14 +266,18 @@ class AuthController extends Controller
         }
 
         $user = null;
-        $identifier = $request->email ?? $request->no_telepon;
+        $identifier = $request->identifier;
 
-        if ($request->email) {
-            $user = User::where('email', $request->email)->first();
-        } else if ($request->no_telepon) {
-            $pasien = Pasien::where('no_telepon', $request->no_telepon)->first();
-            if ($pasien) {
-                $user = User::find($pasien->user_id);
+        // Cek apakah identifier adalah email
+        if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
+            $user = User::where('email', $identifier)->first();
+        } else {
+            // Jika bukan email, anggap sebagai nomor telepon
+            $user = User::where('no_telepon', $identifier)->first();
+
+            // Cek juga format email khusus untuk pengguna nomor telepon
+            if (!$user) {
+                $user = User::where('email', $identifier . '@phone.user')->first();
             }
         }
 

@@ -62,7 +62,7 @@ class JadwalDokterSeeder extends Seeder
                 'updated_at' => now(),
             ],
 
-            // Jadwal drg. Ratna Dewi (Poli Gigi)
+            // Jadwal drg. Ratna Dewi (Poli Gigi & Mulut)
             [
                 'dokter_id' => 3,
                 'hari' => 'Senin',
@@ -91,7 +91,7 @@ class JadwalDokterSeeder extends Seeder
                 'updated_at' => now(),
             ],
 
-            // Jadwal dr. Budi Santoso, Sp.A (Poli Anak)
+            // Jadwal dr. Budi Santoso, Sp.A (Poli MTBS)
             [
                 'dokter_id' => 4,
                 'hari' => 'Selasa',
@@ -111,7 +111,7 @@ class JadwalDokterSeeder extends Seeder
                 'updated_at' => now(),
             ],
 
-            // Jadwal dr. Maya Puteri, Sp.OG (Poli Kandungan)
+            // Jadwal dr. Maya Puteri, Sp.OG (Poli KIA & KB)
             [
                 'dokter_id' => 5,
                 'hari' => 'Senin',
@@ -131,7 +131,7 @@ class JadwalDokterSeeder extends Seeder
                 'updated_at' => now(),
             ],
 
-            // Jadwal dr. Haryanto, Sp.PD (Poli Lansia)
+            // Jadwal dr. Haryanto, Sp.PD (Poli P2PM)
             [
                 'dokter_id' => 6,
                 'hari' => 'Rabu',

@@ -1,0 +1,720 @@
+{
+    "info": {
+        "_postman_id": "a5e3d8c4-7f3b-4b8a-8e2c-f5c2b9a6e3d1",
+        "name": "Puskesmas - API Pasien New",
+        "description": "Dokumentasi API untuk manajemen data pasien di Puskesmas Kluwung",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Auth",
+            "description": "Endpoint untuk autentikasi",
+            "item": [
+                {
+                    "name": "Login",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"pasien@example.com\",\n    \"password\": \"password123\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/login",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "login"
+                            ]
+                        },
+                        "description": "Login untuk mendapatkan token autentikasi"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Login with PIN",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"pasien@example.com\",\n    \"pin\": \"123456\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/login-pin",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "login-pin"
+                            ]
+                        },
+                        "description": "Login menggunakan PIN"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Register",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Nama Pasien\",\n    \"email\": \"pasien@example.com\",\n    \"no_telepon\": \"081234567890\",\n    \"nik\": \"1234567890123456\",\n    \"tanggal_lahir\": \"1990-01-01\",\n    \"jenis_kelamin\": \"Laki-laki\",\n    \"alamat\": \"Jl. Contoh No. 123\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/register",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "register"
+                            ]
+                        },
+                        "description": "Registrasi pasien baru"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Pasien",
+            "description": "Endpoint untuk manajemen data pasien",
+            "item": [
+                {
+                    "name": "Tambah Pasien",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "is_pasien_baru",
+                                    "value": "true",
+                                    "type": "text",
+                                    "description": "Apakah pasien baru atau lama (true/false) (wajib)"
+                                },
+                                {
+                                    "key": "no_rm",
+                                    "value": "RM-000001",
+                                    "type": "text",
+                                    "description": "Nomor rekam medis (wajib jika is_pasien_baru=false)"
+                                },
+                                {
+                                    "key": "email",
+                                    "value": "anggota@example.com",
+                                    "type": "text",
+                                    "description": "Email pasien (opsional)"
+                                },
+                                {
+                                    "key": "nik",
+                                    "value": "1234567890123456",
+                                    "type": "text",
+                                    "description": "NIK pasien (wajib)"
+                                },
+                                {
+                                    "key": "no_bpjs",
+                                    "value": "0987654321",
+                                    "type": "text",
+                                    "description": "Nomor BPJS (opsional)"
+                                },
+                                {
+                                    "key": "jenis",
+                                    "value": "Utama",
+                                    "type": "text",
+                                    "description": "Jenis pasien: Utama/Keluarga (wajib)"
+                                },
+                                {
+                                    "key": "hubungan_keluarga",
+                                    "value": "Anak",
+                                    "type": "text",
+                                    "description": "Hubungan keluarga jika jenis=Keluarga"
+                                },
+                                {
+                                    "key": "nama",
+                                    "value": "Nama Lengkap",
+                                    "type": "text",
+                                    "description": "Nama lengkap pasien (wajib)"
+                                },
+                                {
+                                    "key": "tempat_lahir",
+                                    "value": "Jakarta",
+                                    "type": "text",
+                                    "description": "Tempat lahir (opsional)"
+                                },
+                                {
+                                    "key": "tanggal_lahir",
+                                    "value": "1990-01-01",
+                                    "type": "text",
+                                    "description": "Tanggal lahir format YYYY-MM-DD (wajib)"
+                                },
+                                {
+                                    "key": "jenis_kelamin",
+                                    "value": "Laki-laki",
+                                    "type": "text",
+                                    "description": "Jenis kelamin: Laki-laki/Perempuan (wajib)"
+                                },
+                                {
+                                    "key": "golongan_darah",
+                                    "value": "A+",
+                                    "type": "text",
+                                    "description": "Golongan darah: A/B/AB/O/-A/-B/-AB/-O/A+/B+/AB+/O+ (opsional)"
+                                },
+                                {
+                                    "key": "alamat",
+                                    "value": "Jl. Contoh No. 123",
+                                    "type": "text",
+                                    "description": "Alamat lengkap (wajib)"
+                                },
+                                {
+                                    "key": "rt",
+                                    "value": "001",
+                                    "type": "text",
+                                    "description": "RT (opsional)"
+                                },
+                                {
+                                    "key": "rw",
+                                    "value": "002",
+                                    "type": "text",
+                                    "description": "RW (opsional)"
+                                },
+                                {
+                                    "key": "kelurahan",
+                                    "value": "Kelurahan Contoh",
+                                    "type": "text",
+                                    "description": "Kelurahan (opsional)"
+                                },
+                                {
+                                    "key": "kecamatan",
+                                    "value": "Kecamatan Contoh",
+                                    "type": "text",
+                                    "description": "Kecamatan (opsional)"
+                                },
+                                {
+                                    "key": "kabupaten",
+                                    "value": "Kabupaten Contoh",
+                                    "type": "text",
+                                    "description": "Kabupaten/Kota (opsional)"
+                                },
+                                {
+                                    "key": "provinsi",
+                                    "value": "Jawa Tengah",
+                                    "type": "text",
+                                    "description": "Provinsi (opsional)"
+                                },
+                                {
+                                    "key": "no_telepon",
+                                    "value": "081234567890",
+                                    "type": "text",
+                                    "description": "Nomor telepon (opsional)"
+                                },
+                                {
+                                    "key": "agama",
+                                    "value": "Islam",
+                                    "type": "text",
+                                    "description": "Agama (opsional)"
+                                },
+                                {
+                                    "key": "status_pernikahan",
+                                    "value": "Belum Menikah",
+                                    "type": "text",
+                                    "description": "Status pernikahan (opsional)"
+                                },
+                                {
+                                    "key": "pekerjaan",
+                                    "value": "Karyawan Swasta",
+                                    "type": "text",
+                                    "description": "Pekerjaan (opsional)"
+                                },
+                                {
+                                    "key": "foto",
+                                    "type": "file",
+                                    "description": "Foto pasien (opsional, max 2MB)"
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/pasien",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "pasien"
+                            ]
+                        },
+                        "description": "Menambahkan data pasien baru atau lama. Jika is_pasien_baru=true, akan dibuat nomor RM baru. Jika is_pasien_baru=false, harus menyertakan no_rm yang valid."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Detail Pasien",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/pasien/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "pasien",
+                                "1"
+                            ]
+                        },
+                        "description": "Mendapatkan detail data pasien berdasarkan ID"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Pasien",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "email",
+                                    "value": "anggota@example.com",
+                                    "type": "text",
+                                    "description": "Email pasien (opsional)"
+                                },
+                                {
+                                    "key": "nik",
+                                    "value": "1234567890123456",
+                                    "type": "text",
+                                    "description": "NIK pasien (wajib)"
+                                },
+                                {
+                                    "key": "no_bpjs",
+                                    "value": "0987654321",
+                                    "type": "text",
+                                    "description": "Nomor BPJS (opsional)"
+                                },
+                                {
+                                    "key": "jenis",
+                                    "value": "Utama",
+                                    "type": "text",
+                                    "description": "Jenis pasien: Utama/Keluarga (wajib)"
+                                },
+                                {
+                                    "key": "hubungan_keluarga",
+                                    "value": "Anak",
+                                    "type": "text",
+                                    "description": "Hubungan keluarga jika jenis=Keluarga"
+                                },
+                                {
+                                    "key": "nama",
+                                    "value": "Nama Lengkap",
+                                    "type": "text",
+                                    "description": "Nama lengkap pasien (wajib)"
+                                },
+                                {
+                                    "key": "tempat_lahir",
+                                    "value": "Jakarta",
+                                    "type": "text",
+                                    "description": "Tempat lahir (opsional)"
+                                },
+                                {
+                                    "key": "tanggal_lahir",
+                                    "value": "1990-01-01",
+                                    "type": "text",
+                                    "description": "Tanggal lahir format YYYY-MM-DD (wajib)"
+                                },
+                                {
+                                    "key": "jenis_kelamin",
+                                    "value": "Laki-laki",
+                                    "type": "text",
+                                    "description": "Jenis kelamin: Laki-laki/Perempuan (wajib)"
+                                },
+                                {
+                                    "key": "golongan_darah",
+                                    "value": "A+",
+                                    "type": "text",
+                                    "description": "Golongan darah: A/B/AB/O/-A/-B/-AB/-O/A+/B+/AB+/O+ (opsional)"
+                                },
+                                {
+                                    "key": "alamat",
+                                    "value": "Jl. Contoh No. 123",
+                                    "type": "text",
+                                    "description": "Alamat lengkap (wajib)"
+                                },
+                                {
+                                    "key": "rt",
+                                    "value": "001",
+                                    "type": "text",
+                                    "description": "RT (opsional)"
+                                },
+                                {
+                                    "key": "rw",
+                                    "value": "002",
+                                    "type": "text",
+                                    "description": "RW (opsional)"
+                                },
+                                {
+                                    "key": "kelurahan",
+                                    "value": "Kelurahan Contoh",
+                                    "type": "text",
+                                    "description": "Kelurahan (opsional)"
+                                },
+                                {
+                                    "key": "kecamatan",
+                                    "value": "Kecamatan Contoh",
+                                    "type": "text",
+                                    "description": "Kecamatan (opsional)"
+                                },
+                                {
+                                    "key": "kabupaten",
+                                    "value": "Kabupaten Contoh",
+                                    "type": "text",
+                                    "description": "Kabupaten/Kota (opsional)"
+                                },
+                                {
+                                    "key": "provinsi",
+                                    "value": "Jawa Tengah",
+                                    "type": "text",
+                                    "description": "Provinsi (opsional)"
+                                },
+                                {
+                                    "key": "no_telepon",
+                                    "value": "081234567890",
+                                    "type": "text",
+                                    "description": "Nomor telepon (opsional)"
+                                },
+                                {
+                                    "key": "agama",
+                                    "value": "Islam",
+                                    "type": "text",
+                                    "description": "Agama (opsional)"
+                                },
+                                {
+                                    "key": "status_pernikahan",
+                                    "value": "Belum Menikah",
+                                    "type": "text",
+                                    "description": "Status pernikahan (opsional)"
+                                },
+                                {
+                                    "key": "pekerjaan",
+                                    "value": "Karyawan Swasta",
+                                    "type": "text",
+                                    "description": "Pekerjaan (opsional)"
+                                },
+                                {
+                                    "key": "foto",
+                                    "type": "file",
+                                    "description": "Foto pasien (opsional, max 2MB)"
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/pasien/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "pasien",
+                                "1"
+                            ]
+                        },
+                        "description": "Mengupdate data pasien berdasarkan ID"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Hapus Pasien",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/pasien/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "pasien",
+                                "1"
+                            ]
+                        },
+                        "description": "Menghapus data pasien berdasarkan ID (hanya admin)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Cari Pasien",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"keyword\": \"123456\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/pasien/search",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "pasien",
+                                "search"
+                            ]
+                        },
+                        "description": "Mencari pasien berdasarkan keyword (NIK, No RM, No BPJS, Nama, atau No Telepon)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Upload Foto Pasien",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "foto",
+                                    "type": "file",
+                                    "description": "File foto pasien (max 2MB)"
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/pasien/1/upload-foto",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "pasien",
+                                "1",
+                                "upload-foto"
+                            ]
+                        },
+                        "description": "Upload foto untuk pasien tertentu"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Data Keluarga Pasien",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/keluarga-pasien",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "keluarga-pasien"
+                            ]
+                        },
+                        "description": "Mendapatkan data pasien utama dan anggota keluarganya"
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ],
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        }
+    ],
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:8000",
+            "type": "string"
+        },
+        {
+            "key": "token",
+            "value": "YOUR_AUTH_TOKEN_HERE",
+            "type": "string"
+        }
+    ]
+}

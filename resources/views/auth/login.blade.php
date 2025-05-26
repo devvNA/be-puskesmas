@@ -119,9 +119,9 @@
     </div>
     <div class="login-container">
         @if (session('error'))
-            <div class="alert">
-                {{ session('error') }}
-            </div>
+        <div class="alert">
+            {{ session('error') }}
+        </div>
         @endif
 
         <form method="POST" action="{{ route('login') }}">
@@ -130,18 +130,18 @@
                 <input type="text" name="username" placeholder="Username" required autofocus
                     value="{{ old('username') }}">
                 @error('username')
-                    <div class="error-message">
-                        {{ $message }}
-                    </div>
+                <div class="error-message">
+                    {{ $message }}
+                </div>
                 @enderror
             </div>
 
             <div class="form-group">
                 <input type="password" name="password" placeholder="Password" required>
                 @error('password')
-                    <div class="error-message">
-                        {{ $message }}
-                    </div>
+                <div class="error-message">
+                    {{ $message }}
+                </div>
                 @enderror
             </div>
 

@@ -5,137 +5,305 @@
 @section('content')
 <div class="container-fluid">
     <!-- Header -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Tambah Pasien Baru</h1>
-        <a href="{{ route('admin.pasien.index') }}" class="btn btn-sm btn-secondary shadow-sm">
-            <i class="fas fa-arrow-left fa-sm text-white-50 me-1"></i> Kembali
-        </a>
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <div class="d-flex align-items-center">
+            <a href="{{ route('admin.pasien.index') }}" class="btn btn-sm btn-light rounded-circle me-3 shadow-sm border">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <h1 class="h3 mb-0 text-gray-800 fw-bold">Tambah Pasien Baru</h1>
+        </div>
     </div>
 
-    <div class="card shadow mb-4">
-        <div class="card-header py-3" style="background-color: #11894A; color: white;">
-            <h6 class="m-0 font-weight-bold">Form Pendaftaran Pasien</h6>
+    <div class="card shadow-sm border-0 rounded-3 overflow-hidden mb-4">
+        <div class="card-header py-3 d-flex align-items-center" style="background-color: #11894A;">
+            <h6 class="m-0 fw-bold text-white">
+                <i class="fas fa-user-plus me-2"></i> Form Pendaftaran Pasien
+            </h6>
         </div>
-        <div class="card-body">
+        <div class="card-body p-4">
             <form action="{{ route('admin.pasien.store') }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
                 @csrf
 
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="no_rm" class="form-label">Nomor Rekam Medis <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control @error('no_rm') is-invalid @enderror"
-                                id="no_rm" name="no_rm" value="{{ old('no_rm') }}" required>
-                            @error('no_rm')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                            <div class="form-text">Format: RM-XXX (contoh: RM-001)</div>
+                <div class="row g-4">
+                    <!-- Informasi Utama -->
+                    <div class="col-12">
+                        <div class="p-3 border bg-light rounded-3 mb-2">
+                            <h6 class="fw-bold mb-3">Informasi Utama</h6>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="no_rm" class="form-label">
+                                        Nomor Rekam Medis
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light"><i class="fas fa-file-medical text-primary"></i></span>
+                                        <input type="text" class="form-control @error('no_rm') is-invalid @enderror"
+                                            id="no_rm" name="no_rm" value="{{ old('no_rm') }}"
+                                            placeholder="Otomatis jika kosong">
+                                        @error('no_rm')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-text">Format: RM-XXX (contoh: RM-001). Akan dibuat otomatis jika tidak diisi.</div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="nik" class="form-label">
+                                        NIK <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light"><i class="fas fa-id-card text-primary"></i></span>
+                                        <input type="text" class="form-control @error('nik') is-invalid @enderror"
+                                            id="nik" name="nik" value="{{ old('nik') }}" required maxlength="16"
+                                            placeholder="16 digit NIK">
+                                        @error('nik')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-text">Masukkan 16 digit Nomor Induk Kependudukan</div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label for="nama" class="form-label">
+                                        Nama Lengkap <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light"><i class="fas fa-user text-primary"></i></span>
+                                        <input type="text" class="form-control @error('nama') is-invalid @enderror"
+                                            id="nama" name="nama" value="{{ old('nama') }}" required
+                                            placeholder="Masukkan nama lengkap">
+                                        @error('nama')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">
+                                        Email
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light"><i class="fas fa-envelope text-primary"></i></span>
+                                        <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                            id="email" name="email" value="{{ old('email') }}"
+                                            placeholder="contoh@email.com">
+                                        @error('email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="no_telepon" class="form-label">
+                                        Nomor Telepon
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light"><i class="fas fa-phone text-primary"></i></span>
+                                        <input type="text" class="form-control @error('no_telepon') is-invalid @enderror"
+                                            id="no_telepon" name="no_telepon" value="{{ old('no_telepon') }}"
+                                            placeholder="contoh: 081234567890">
+                                        @error('no_telepon')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="nik" class="form-label">NIK <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control @error('nik') is-invalid @enderror"
-                                id="nik" name="nik" value="{{ old('nik') }}" required maxlength="16"
-                                placeholder="16 digit NIK">
-                            @error('nik')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                            <div class="form-text">Masukkan 16 digit Nomor Induk Kependudukan</div>
+
+                    <!-- Informasi Pribadi -->
+                    <div class="col-md-8">
+                        <div class="p-3 border bg-light rounded-3 h-100">
+                            <h6 class="fw-bold mb-3">Informasi Pribadi</h6>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="tanggal_lahir" class="form-label">
+                                        Tanggal Lahir <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light"><i class="fas fa-calendar-alt text-primary"></i></span>
+                                        <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror"
+                                            id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" required>
+                                        @error('tanggal_lahir')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="jenis_kelamin" class="form-label">
+                                        Jenis Kelamin <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light"><i class="fas fa-venus-mars text-primary"></i></span>
+                                        <select class="form-select @error('jenis_kelamin') is-invalid @enderror"
+                                            id="jenis_kelamin" name="jenis_kelamin" required>
+                                            <option value="" selected disabled>-- Pilih Jenis Kelamin --</option>
+                                            <option value="Laki-laki" {{ old('jenis_kelamin') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                                            <option value="Perempuan" {{ old('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                                        </select>
+                                        @error('jenis_kelamin')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="golongan_darah" class="form-label">
+                                        Golongan Darah
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light"><i class="fas fa-tint text-danger"></i></span>
+                                        <select class="form-select @error('golongan_darah') is-invalid @enderror"
+                                            id="golongan_darah" name="golongan_darah">
+                                            <option value="-" {{ old('golongan_darah') == '-' ? 'selected' : '' }}>Tidak diketahui</option>
+                                            <option value="A" {{ old('golongan_darah') == 'A' ? 'selected' : '' }}>A</option>
+                                            <option value="B" {{ old('golongan_darah') == 'B' ? 'selected' : '' }}>B</option>
+                                            <option value="AB" {{ old('golongan_darah') == 'AB' ? 'selected' : '' }}>AB</option>
+                                            <option value="O" {{ old('golongan_darah') == 'O' ? 'selected' : '' }}>O</option>
+                                        </select>
+                                        @error('golongan_darah')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="hubungan_keluarga" class="form-label">
+                                        Hubungan Keluarga
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light"><i class="fas fa-users text-primary"></i></span>
+                                        <input type="text" class="form-control @error('hubungan_keluarga') is-invalid @enderror"
+                                            id="hubungan_keluarga" name="hubungan_keluarga" value="{{ old('hubungan_keluarga') }}"
+                                            placeholder="Contoh: Kepala Keluarga">
+                                        @error('hubungan_keluarga')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="alamat" class="form-label">
+                                        Alamat Lengkap <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light"><i class="fas fa-map-marker-alt text-primary"></i></span>
+                                        <textarea class="form-control @error('alamat') is-invalid @enderror"
+                                            id="alamat" name="alamat" rows="3" required
+                                            placeholder="Masukkan alamat lengkap">{{ old('alamat') }}</textarea>
+                                        @error('alamat')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label for="rt" class="form-label">RT</label>
+                                    <input type="text" class="form-control @error('rt') is-invalid @enderror"
+                                        id="rt" name="rt" value="{{ old('rt') }}" placeholder="001">
+                                    @error('rt')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label for="rw" class="form-label">RW</label>
+                                    <input type="text" class="form-control @error('rw') is-invalid @enderror"
+                                        id="rw" name="rw" value="{{ old('rw') }}" placeholder="002">
+                                    @error('rw')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="provinsi" class="form-label">Provinsi</label>
+                                    <input type="text" class="form-control @error('provinsi') is-invalid @enderror"
+                                        id="provinsi" name="provinsi" value="{{ old('provinsi') }}" placeholder="Jawa Tengah">
+                                    @error('provinsi')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Foto Pasien dan Informasi Tambahan -->
+                    <div class="col-md-4">
+                        <div class="p-3 border bg-light rounded-3 mb-4">
+                            <h6 class="fw-bold mb-3">Foto Pasien</h6>
+
+                            <div class="text-center py-3 mb-3 rounded bg-white">
+                                <div id="image-preview-container" class="mb-3" style="display: none;">
+                                    <img id="image-preview" src="#" alt="Preview Foto" class="img-thumbnail mx-auto" style="max-height: 200px; max-width: 100%;">
+                                </div>
+
+                                <div id="default-preview" class="mb-3">
+                                    <div class="avatar-placeholder bg-secondary bg-opacity-10 rounded-circle mx-auto d-flex align-items-center justify-content-center" style="width: 150px; height: 150px;">
+                                        <i class="fas fa-user fa-4x text-secondary opacity-50"></i>
+                                    </div>
+                                </div>
+
+                                <div class="d-grid">
+                                    <label for="foto" class="btn btn-outline-primary">
+                                        <i class="fas fa-camera me-2"></i> Pilih Foto
+                                    </label>
+                                    <input type="file" class="form-control d-none @error('foto') is-invalid @enderror"
+                                        id="foto" name="foto" accept="image/*">
+                                </div>
+                                @error('foto')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
+                                <div class="form-text mt-2">Format: JPG, JPEG, atau PNG (maks. 2MB)</div>
+                            </div>
+                        </div>
+
+                        <!-- Informasi BPJS & Jenis Pasien -->
+                        <div class="p-3 border bg-light rounded-3">
+                            <h6 class="fw-bold mb-3">Informasi Tambahan</h6>
+
+                            <div class="mb-3">
+                                <label for="jenis" class="form-label">
+                                    Jenis Pasien <span class="text-danger">*</span>
+                                </label>
+                                <select class="form-select @error('jenis') is-invalid @enderror"
+                                    id="jenis" name="jenis" required>
+                                    <option value="" selected disabled>-- Pilih Jenis Pasien --</option>
+                                    <option value="Reguler (BPJS)" {{ old('jenis') == 'Reguler (BPJS)' ? 'selected' : '' }}>Reguler (BPJS)</option>
+                                    <option value="Eksekutif (Non BPJS)" {{ old('jenis') == 'Eksekutif (Non BPJS)' ? 'selected' : '' }}>Eksekutif (Non BPJS)</option>
+                                </select>
+                                @error('jenis')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="no_bpjs" class="form-label">No. BPJS</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light"><i class="fas fa-id-card-alt text-primary"></i></span>
+                                    <input type="text" class="form-control @error('no_bpjs') is-invalid @enderror"
+                                        id="no_bpjs" name="no_bpjs" value="{{ old('no_bpjs') }}"
+                                        placeholder="Nomor Kartu BPJS">
+                                    @error('no_bpjs')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-text">Kosongkan jika tidak memiliki kartu BPJS</div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="mb-3">
-                    <label for="nama" class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control @error('nama') is-invalid @enderror"
-                        id="nama" name="nama" value="{{ old('nama') }}" required>
-                    @error('nama')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
+                <hr class="my-4">
 
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                    <input type="email" class="form-control @error('email') is-invalid @enderror"
-                        id="email" name="email" value="{{ old('email') }}" required>
-                    @error('email')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="tanggal_lahir" class="form-label">Tanggal Lahir <span class="text-danger">*</span></label>
-                            <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror"
-                                id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" required>
-                            @error('tanggal_lahir')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="jenis_kelamin" class="form-label">Jenis Kelamin <span class="text-danger">*</span></label>
-                            <select class="form-select @error('jenis_kelamin') is-invalid @enderror"
-                                id="jenis_kelamin" name="jenis_kelamin" required>
-                                <option value="" selected disabled>-- Pilih Jenis Kelamin --</option>
-                                <option value="Laki-laki" {{ old('jenis_kelamin') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
-                                <option value="Perempuan" {{ old('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
-                            </select>
-                            @error('jenis_kelamin')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label for="alamat" class="form-label">Alamat <span class="text-danger">*</span></label>
-                    <textarea class="form-control @error('alamat') is-invalid @enderror"
-                        id="alamat" name="alamat" rows="3" required>{{ old('alamat') }}</textarea>
-                    @error('alamat')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="mb-3">
-                    <label for="no_telepon" class="form-label">Nomor Telepon <span class="text-danger">*</span></label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                        <input type="text" class="form-control @error('no_telepon') is-invalid @enderror"
-                            id="no_telepon" name="no_telepon" value="{{ old('no_telepon') }}"
-                            required placeholder="contoh: 081234567890">
-                    </div>
-                    @error('no_telepon')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="mb-4">
-                    <label for="foto" class="form-label">Foto Pasien</label>
-                    <input type="file" class="form-control @error('foto') is-invalid @enderror"
-                        id="foto" name="foto" accept="image/*">
-                    @error('foto')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                    <div class="form-text">Upload foto dengan format JPG, JPEG, atau PNG (maks. 2MB)</div>
-
-                    <div class="mt-2" id="image-preview-container" style="display: none;">
-                        <img id="image-preview" src="#" alt="Preview Foto" class="img-thumbnail" style="max-height: 200px;">
-                    </div>
-                </div>
-
-                <div class="border-top pt-3">
-                    <div class="d-flex justify-content-end gap-2">
-                        <a href="{{ route('admin.pasien.index') }}" class="btn btn-secondary">
-                            <i class="fas fa-times me-1"></i> Batal
-                        </a>
-                        <button type="submit" class="btn btn-success" style="background-color: #11894A; border-color: #11894A;">
-                            <i class="fas fa-save me-1"></i> Simpan Data
-                        </button>
-                    </div>
+                <div class="d-flex justify-content-between">
+                    <a href="{{ route('admin.pasien.index') }}" class="btn btn-outline-secondary px-4">
+                        <i class="fas fa-arrow-left me-2"></i>Kembali
+                    </a>
+                    <button type="submit" class="btn btn-success px-5" style="background-color: #11894A; border: none;">
+                        <i class="fas fa-save me-2"></i>Simpan Data
+                    </button>
                 </div>
             </form>
         </div>
@@ -144,47 +312,26 @@
 
 @push('scripts')
 <script>
-    // Preview foto yang diupload
-    document.getElementById('foto').addEventListener('change', function() {
-        const previewContainer = document.getElementById('image-preview-container');
-        const preview = document.getElementById('image-preview');
-        const file = this.files[0];
+    // Preview foto
+    document.addEventListener('DOMContentLoaded', function() {
+        const fileInput = document.getElementById('foto');
+        const imagePreview = document.getElementById('image-preview');
+        const imageContainer = document.getElementById('image-preview-container');
+        const defaultPreview = document.getElementById('default-preview');
 
-        if (file) {
-            const reader = new FileReader();
+        fileInput.addEventListener('change', function() {
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
 
-            reader.onload = function(e) {
-                preview.src = e.target.result;
-                previewContainer.style.display = 'block';
-            }
-
-            reader.readAsDataURL(file);
-        } else {
-            previewContainer.style.display = 'none';
-        }
-    });
-
-    // Form validation
-    (function() {
-        'use strict';
-
-        const forms = document.querySelectorAll('.needs-validation');
-
-        Array.from(forms).forEach(form => {
-            form.addEventListener('submit', event => {
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imageContainer.style.display = 'block';
+                    defaultPreview.style.display = 'none';
                 }
 
-                form.classList.add('was-validated');
-            }, false);
+                reader.readAsDataURL(fileInput.files[0]);
+            }
         });
-    })();
-
-    // Validasi NIK hanya angka
-    document.getElementById('nik').addEventListener('input', function() {
-        this.value = this.value.replace(/[^0-9]/g, '');
     });
 </script>
 @endpush

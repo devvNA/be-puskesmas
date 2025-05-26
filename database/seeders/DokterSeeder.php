@@ -14,7 +14,7 @@ class DokterSeeder extends Seeder
     {
         $dokterData = [
             [
-                'poli_id' => 1, // Poli Umum
+                'poli_id' => 2, // Poli Umum
                 'nama' => 'dr. Agus Setiawan',
                 'spesialisasi' => 'Dokter Umum',
                 'foto' => null,
@@ -23,7 +23,7 @@ class DokterSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'poli_id' => 1, // Poli Umum
+                'poli_id' => 2, // Poli Umum
                 'nama' => 'dr. Dian Purnama',
                 'spesialisasi' => 'Dokter Umum',
                 'foto' => null,
@@ -32,7 +32,7 @@ class DokterSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'poli_id' => 2, // Poli Gigi
+                'poli_id' => 1, // Poli Gigi & Mulut
                 'nama' => 'drg. Ratna Dewi',
                 'spesialisasi' => 'Dokter Gigi',
                 'foto' => null,
@@ -41,7 +41,7 @@ class DokterSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'poli_id' => 3, // Poli Anak
+                'poli_id' => 4, // Poli MTBS
                 'nama' => 'dr. Budi Santoso, Sp.A',
                 'spesialisasi' => 'Spesialis Anak',
                 'foto' => null,
@@ -50,7 +50,7 @@ class DokterSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'poli_id' => 4, // Poli Kandungan
+                'poli_id' => 3, // Poli KIA & KB
                 'nama' => 'dr. Maya Puteri, Sp.OG',
                 'spesialisasi' => 'Spesialis Obstetri dan Ginekologi',
                 'foto' => null,
@@ -59,7 +59,7 @@ class DokterSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'poli_id' => 5, // Poli Lansia
+                'poli_id' => 5, // Poli P2PM
                 'nama' => 'dr. Haryanto, Sp.PD',
                 'spesialisasi' => 'Spesialis Penyakit Dalam',
                 'foto' => null,

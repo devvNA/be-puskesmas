@@ -15,7 +15,7 @@ class JadwalPoliSeeder extends Seeder
         $jadwalPoliData = [
             // Jadwal Poli Umum
             [
-                'poli_id' => 1,
+                'poli_id' => 2,
                 'hari' => 'Senin',
                 'jam_buka' => '08:00:00',
                 'jam_tutup' => '16:00:00',
@@ -24,7 +24,7 @@ class JadwalPoliSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'poli_id' => 1,
+                'poli_id' => 2,
                 'hari' => 'Selasa',
                 'jam_buka' => '08:00:00',
                 'jam_tutup' => '16:00:00',
@@ -33,7 +33,7 @@ class JadwalPoliSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'poli_id' => 1,
+                'poli_id' => 2,
                 'hari' => 'Rabu',
                 'jam_buka' => '08:00:00',
                 'jam_tutup' => '16:00:00',
@@ -42,7 +42,7 @@ class JadwalPoliSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'poli_id' => 1,
+                'poli_id' => 2,
                 'hari' => 'Kamis',
                 'jam_buka' => '08:00:00',
                 'jam_tutup' => '16:00:00',
@@ -51,7 +51,7 @@ class JadwalPoliSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'poli_id' => 1,
+                'poli_id' => 2,
                 'hari' => 'Jumat',
                 'jam_buka' => '08:00:00',
                 'jam_tutup' => '15:00:00',
@@ -60,9 +60,9 @@ class JadwalPoliSeeder extends Seeder
                 'updated_at' => now(),
             ],
 
-            // Jadwal Poli Gigi
+            // Jadwal Poli Gigi & Mulut
             [
-                'poli_id' => 2,
+                'poli_id' => 1,
                 'hari' => 'Senin',
                 'jam_buka' => '09:00:00',
                 'jam_tutup' => '15:00:00',
@@ -71,7 +71,7 @@ class JadwalPoliSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'poli_id' => 2,
+                'poli_id' => 1,
                 'hari' => 'Rabu',
                 'jam_buka' => '09:00:00',
                 'jam_tutup' => '15:00:00',
@@ -80,7 +80,7 @@ class JadwalPoliSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'poli_id' => 2,
+                'poli_id' => 1,
                 'hari' => 'Jumat',
                 'jam_buka' => '09:00:00',
                 'jam_tutup' => '15:00:00',
@@ -89,7 +89,7 @@ class JadwalPoliSeeder extends Seeder
                 'updated_at' => now(),
             ],
 
-            // Jadwal Poli Anak
+            // Jadwal Poli KIA & KB
             [
                 'poli_id' => 3,
                 'hari' => 'Selasa',
@@ -109,7 +109,7 @@ class JadwalPoliSeeder extends Seeder
                 'updated_at' => now(),
             ],
 
-            // Jadwal Poli Kandungan
+            // Jadwal Poli MTBS
             [
                 'poli_id' => 4,
                 'hari' => 'Senin',
@@ -129,7 +129,7 @@ class JadwalPoliSeeder extends Seeder
                 'updated_at' => now(),
             ],
 
-            // Jadwal Poli Lansia
+            // Jadwal Poli P2PM
             [
                 'poli_id' => 5,
                 'hari' => 'Rabu',

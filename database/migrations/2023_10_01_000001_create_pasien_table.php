@@ -16,12 +16,18 @@ return new class extends Migration
             $table->string('email')->unique()->nullable();
             $table->string('no_rm')->unique()->comment('Nomor Rekam Medis')->nullable();
             $table->string('nik', 16)->unique()->nullable();
-            $table->string('nama');
-            $table->date('tanggal_lahir');
-            $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
-            $table->text('alamat');
+            $table->string('no_bpjs')->nullable()->comment('Nomor BPJS');
+            $table->enum('jenis', ['Reguler (BPJS)', 'Eksekutif (Non BPJS)'])->nullable();
+            $table->string('hubungan_keluarga')->nullable();
+            $table->string('nama')->nullable();
+            $table->date('tanggal_lahir')->nullable();
+            $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan'])->nullable();
+            $table->enum('golongan_darah', ['A', 'B', 'AB', 'O', '-'])->default('-')->nullable();
+            $table->text('alamat')->nullable();
+            $table->string('rt')->nullable();
+            $table->string('rw')->nullable();
+            $table->string('provinsi')->nullable();
             $table->string('no_telepon', 15)->nullable();
-            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }

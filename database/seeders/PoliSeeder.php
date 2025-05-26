@@ -14,6 +14,14 @@ class PoliSeeder extends Seeder
     {
         $poliData = [
             [
+                'nama' => 'Poli Gigi & Mulut',
+                'deskripsi' => 'Pemeriksaan dan perawatan kesehatan gigi dan mulut',
+                'kuota_harian' => 25,
+                'status' => 'aktif',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
                 'nama' => 'Poli Umum',
                 'deskripsi' => 'Pelayanan kesehatan umum untuk segala usia',
                 'kuota_harian' => 50,
@@ -22,32 +30,24 @@ class PoliSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'nama' => 'Poli Gigi',
-                'deskripsi' => 'Pemeriksaan dan perawatan kesehatan gigi dan mulut',
-                'kuota_harian' => 25,
-                'status' => 'aktif',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'nama' => 'Poli Anak',
-                'deskripsi' => 'Pelayanan kesehatan khusus untuk anak-anak',
+                'nama' => 'Poli KIA & KB',
+                'deskripsi' => 'Pelayanan kesehatan untuk ibu hamil, anak, dan keluarga berencana',
                 'kuota_harian' => 30,
                 'status' => 'aktif',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'nama' => 'Poli Kandungan',
-                'deskripsi' => 'Pelayanan kesehatan untuk ibu hamil dan kesehatan reproduksi wanita',
+                'nama' => 'Poli MTBS',
+                'deskripsi' => 'Manajemen Terpadu Balita Sakit untuk pelayanan kesehatan balita',
                 'kuota_harian' => 20,
                 'status' => 'aktif',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'nama' => 'Poli Lansia',
-                'deskripsi' => 'Pelayanan kesehatan khusus untuk lansia',
+                'nama' => 'Poli P2PM',
+                'deskripsi' => 'Pencegahan dan Pengendalian Penyakit Menular',
                 'kuota_harian' => 15,
                 'status' => 'aktif',
                 'created_at' => now(),

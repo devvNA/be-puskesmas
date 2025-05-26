@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 class PinController extends Controller
 {
     /**
-     * Membuat PIN baru untuk user yang telah login
+     * Membuat PIN baru untuk user berdasarkan identifier
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -18,6 +18,7 @@ class PinController extends Controller
     public function create(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'identifier' => 'required|string',
             'pin' => 'required|string|size:6|regex:/^[0-9]+$/',
         ]);
 
@@ -29,7 +30,31 @@ class PinController extends Controller
             ], 422);
         }
 
-        $user = $request->user();
+        $user = null;
+        $identifier = $request->identifier;
+
+        // Cek apakah identifier adalah email
+        if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
+            $user = \App\Models\User::where('email', $identifier)->first();
+        } else {
+            // Jika bukan email, anggap sebagai nomor telepon
+            $user = \App\Models\User::where('no_telepon', $identifier)->first();
+
+            // Cek juga di tabel pasien jika tidak ditemukan di users
+            if (!$user) {
+                $pasien = \App\Models\Pasien::where('no_telepon', $identifier)->first();
+                if ($pasien) {
+                    $user = \App\Models\User::find($pasien->user_id);
+                }
+            }
+        }
+
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Pengguna tidak ditemukan'
+            ], 404);
+        }
 
         // Update PIN user
         $user->pin = Hash::make($request->pin);
@@ -38,48 +63,6 @@ class PinController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'PIN berhasil dibuat',
-        ]);
-    }
-
-    /**
-     * Verifikasi PIN user
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function verify(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'pin' => 'required|string|size:6|regex:/^[0-9]+$/',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Validasi gagal',
-                'errors' => $validator->errors()
-            ], 422);
-        }
-
-        $user = $request->user();
-
-        if (!$user->pin) {
-            return response()->json([
-                'success' => false,
-                'message' => 'PIN belum dibuat'
-            ], 400);
-        }
-
-        if (!Hash::check($request->pin, $user->pin)) {
-            return response()->json([
-                'success' => false,
-                'message' => 'PIN tidak valid'
-            ], 401);
-        }
-
-        return response()->json([
-            'success' => true,
-            'message' => 'PIN valid'
         ]);
     }
 

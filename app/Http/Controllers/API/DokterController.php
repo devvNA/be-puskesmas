@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
@@ -31,6 +32,28 @@ class DokterController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Dokter tidak ditemukan',
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data'    => $dokter,
+        ]);
+    }
+
+    /**
+     * Menampilkan daftar dokter berdasarkan ID Poli
+     */
+    public function getByPoli($poliId)
+    {
+        $dokter = Dokter::with('poli', 'jadwal')
+            ->where('poli_id', $poliId)
+            ->get();
+
+        if ($dokter->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Tidak ada dokter ditemukan untuk poli ini',
             ], 404);
         }
 

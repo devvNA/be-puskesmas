@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,12 +15,18 @@ class Pasien extends Model
         'user_id',
         'no_rm',
         'nik',
+        'no_bpjs',
+        'jenis',
+        'hubungan_keluarga',
         'nama',
         'tanggal_lahir',
         'jenis_kelamin',
+        'golongan_darah',
         'alamat',
+        'rt',
+        'rw',
+        'provinsi',
         'no_telepon',
-        'foto',
     ];
 
     /**

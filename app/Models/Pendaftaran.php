@@ -19,6 +19,7 @@ class Pendaftaran extends Model
         'status_kehadiran', // sudah hadir/belum hadir
         'waktu_hadir',
         'keterangan',
+        'waktu_dipanggil',
         'created_at',
         'updated_at'
     ];

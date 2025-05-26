@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('status_kehadiran', ['belum hadir', 'sudah hadir'])->default('belum hadir');
             $table->timestamp('waktu_hadir')->nullable();
             $table->string('keterangan')->nullable();
+            $table->timestamp('waktu_dipanggil')->nullable();
             $table->timestamps();
         });
     }
