@@ -23,7 +23,9 @@ class PendaftaranController extends Controller
             ->orderBy('no_antrian', 'asc')
             ->paginate(10);
 
-        return view('admin.pendaftaran.index', compact('pendaftaran'));
+        $poli_list = Poli::where('status', 'aktif')->get();
+
+        return view('admin.pendaftaran.index', compact('pendaftaran', 'poli_list'));
     }
 
     /**
@@ -181,7 +183,9 @@ class PendaftaranController extends Controller
             ->orderBy('no_antrian', 'asc')
             ->paginate(10);
 
-        return view('admin.pendaftaran.index', compact('pendaftaran', 'tanggal'));
+        $poli_list = Poli::where('status', 'aktif')->get();
+
+        return view('admin.pendaftaran.index', compact('pendaftaran', 'tanggal', 'poli_list'));
     }
 
     /**
@@ -210,28 +214,37 @@ class PendaftaranController extends Controller
      */
     public function search(Request $request)
     {
-        $tanggal = $request->input('tanggal', Carbon::now()->format('Y-m-d'));
         $search = $request->input('search');
-        $poli_id = $request->input('poli_id');
 
-        $query = Pendaftaran::with(['pasien', 'poli', 'dokter'])
-            ->where('tanggal_pendaftaran', $tanggal);
+        // Inisialisasi query dasar dengan relasi yang diperlukan
+        $query = Pendaftaran::with(['pasien', 'poli', 'dokter']);
 
-        if ($search) {
+        // Lakukan pencarian jika ada kata kunci
+        if ($search && !empty(trim($search))) {
+            // Gunakan eager loading dengan whereHas untuk filter berdasarkan relasi pasien
             $query->whereHas('pasien', function ($q) use ($search) {
-                $q->where('nama', 'like', "%{$search}%")
-                    ->orWhere('no_rm', 'like', "%{$search}%");
+                // Gunakan where untuk mencari nama pasien dan no_rm yang cocok dengan kata kunci
+                $q->where('nama', 'like', '%' . trim($search) . '%')
+                    ->orWhere('no_rm', 'like', '%' . trim($search) . '%');
             });
+        } else {
+            // Jika tidak ada kata kunci pencarian, tampilkan data hari ini
+            $query->where('tanggal_pendaftaran', Carbon::now()->format('Y-m-d'));
         }
 
-        if ($poli_id) {
-            $query->where('poli_id', $poli_id);
-            $poli_name = Poli::find($poli_id)->nama ?? '';
-        }
-
+        // Ambil data pendaftaran yang sesuai dengan kriteria
         $pendaftaran = $query->orderBy('no_antrian', 'asc')->paginate(10);
+
+        // Ambil daftar poli aktif untuk dropdown
         $poli_list = Poli::where('status', 'aktif')->get();
 
-        return view('admin.pendaftaran.index', compact('pendaftaran', 'tanggal', 'search', 'poli_id', 'poli_list', 'poli_name'));
+        // Jika pencarian dilakukan tetapi tidak ada hasil, berikan pesan khusus
+        if ($search && $pendaftaran->isEmpty()) {
+            $message = "Tidak ditemukan data pendaftaran dengan kata kunci '$search'";
+            return view('admin.pendaftaran.index', compact('pendaftaran', 'search', 'poli_list', 'message'));
+        }
+
+        // Tampilkan view dengan data yang sesuai
+        return view('admin.pendaftaran.index', compact('pendaftaran', 'search', 'poli_list'));
     }
 }

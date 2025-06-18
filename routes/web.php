@@ -38,6 +38,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     // Manajemen Pendaftaran
     Route::resource('pendaftaran', PendaftaranController::class);
     Route::get('pendaftaran-search', [PendaftaranController::class, 'searchByDate'])->name('pendaftaran.search');
+    Route::get('pendaftaran-search-pasien', [PendaftaranController::class, 'search'])->name('pendaftaran.search-pasien');
     Route::post('pendaftaran/{pendaftaran}/status', [PendaftaranController::class, 'updateStatus'])->name('pendaftaran.status');
 
     // QR Code
